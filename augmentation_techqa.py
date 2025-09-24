@@ -35,7 +35,7 @@ JSON_SYS_PROMPT = (
     "If any field is not applicable, still include it with an empty array."
 )
 
-SEMANTIC_USER_TMPL = """You are given a context and an original question. Create 3 new question-short answer pairs that are semantically diverse: each question should ask about a different facet of the context, not just paraphrase the original.
+SEMANTIC_USER_TMPL = """You are given a context and an original question-answer. Create 3 new question-short answer pairs that are semantically diverse: each question should ask about a different facet of the context, not just paraphrase the original.
 
 Return the result strictly in JSON with the following structure:
 {{
@@ -49,6 +49,9 @@ Context:
 
 Question:
 {question}
+
+Answer:
+{answer}
 """
 
 SYNTACTIC_USER_TMPL = """You are given a context and a question. Rewrite the question so that it asks for the same information but with different sentence structures. Vary between active/passive voice, simple vs. complex sentences, and alternative grammatical constructions. Keep the meaning identical.
