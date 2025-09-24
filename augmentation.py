@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#NOTE: The augmentation happens before the data filtering 
+
 import argparse
 import csv
 import json
 import os
 import re
 import sys
-import uuid
 from typing import Any, Dict, List, Tuple
 
 import torch

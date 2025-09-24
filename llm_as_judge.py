@@ -89,13 +89,10 @@ Return nothing except this JSON.
 def get_system_prompt(t: str) -> str:
     t_norm = (t or "").strip().lower()
     if t_norm == "semantic":
-        print("SEMANTIC")
         return PROMPT_SEMANTIC
     if t_norm == "syntactic":
-        print("SYNTACTIC")
         return PROMPT_SYNTACTIC
     if t_norm == "LEXICAL":
-        print("lexical")
         return PROMPT_LEXICAL
     # default to Semantic if unknown
     return PROMPT_SEMANTIC
@@ -141,8 +138,8 @@ def force_json(response_text: str) -> Dict[str, Any]:
 def judge_once(system_prompt: str, user_msg: str) -> Dict[str, Any]:
     resp = client.chat.completions.create(
         model=DEPLOYMENT,
-        temperature=0.8,
-        max_tokens=300,
+        temperature=0.4,
+        max_tokens=500,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_msg},
@@ -166,6 +163,8 @@ def main():
     ap = argparse.ArgumentParser(description="LLM-as-Judge for augmented QA validity (Semantic/Syntactic/Lexical).")
     ap.add_argument("--input", required=True, help="Input CSV with columns: type, context, question, answer")
     ap.add_argument("--limit", type=int, default=0, help="Optional limit on number of rows processed")
+    ap.add_argument("--name", type=str)
+    ap.add_argument("--dataset", type=str)
     args = ap.parse_args()
 
     df = pd.read_csv(args.input)
@@ -197,7 +196,7 @@ def main():
         notes_list.append(out["notes"])
 
         if (i + 1) % 25 == 0:
-            print(f"[Info] Judged {i + 1} items...", file=sys.stderr)
+            print(f"[Info] Judged {i + 1}/{len(df)} items...", file=sys.stderr)
 
     df["valid"] = val_list
     df["reason"] = reason_list
@@ -205,12 +204,12 @@ def main():
 
     out_df = pd.DataFrame({
         "item_id": df['aug_id'],        
-        "annotator": "chatgpt",        
+        "annotator": args.name,        
         "valid": df["valid"],
         "reason": df["reason"],
         "notes": df["notes"]
     })
 
-    out_df.to_csv("results/annotator_gpt.csv", index=False)
+    out_df.to_csv(f"results/annotator_{args.dataset}_{args.name}.csv", index=False)
 if __name__ == "__main__":
     main()

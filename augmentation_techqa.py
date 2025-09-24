@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#NOTE: The augmentation happens before the data filtering 
+
 import argparse
 import csv
 import json
 import os
 import re
-import sys
-import uuid
+import sys 
 from typing import Any, Dict, List, Tuple
 
 import pandas as pd
 
 import torch
-from datasets import load_dataset, Dataset, DatasetDict
-
+from datasets import Dataset
 from sklearn.model_selection import train_test_split
 
 
@@ -25,9 +25,6 @@ os.environ.setdefault("CUDA_VISIBLE_DEVICES", "1")
 
 from vllm import LLM, SamplingParams
 
-# -----------------------
-# Prompt templates
-# -----------------------
 
 JSON_SYS_PROMPT = (
     "You are a careful data augmentation engine. "
@@ -479,11 +476,9 @@ def main():
             done = min(i + bs, n)
             if (i // bs) % 5 == 0 or done == n:
                 print(f"[Progress] {done}/{n}", file=sys.stderr, flush=True)
-
-    print("✅ Augmentation finished.")
+ 
     print(f"JSONL: {os.path.abspath(args.out_jsonl)}")
     print(f"CSV:   {os.path.abspath(args.out_csv)}")
-
 
 if __name__ == "__main__":
     import multiprocessing as mp
