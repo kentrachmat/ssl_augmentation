@@ -1,0 +1,6 @@
+embeddings/*.npy
+
+*.csv
+*.jsonl
+.eval_techqa_gpt.py
+.env
