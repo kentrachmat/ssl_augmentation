@@ -1,3 +1,0 @@
-model_name_or_path: Qwen/Qwen2.5-7B-Instruct
-chat_template: qwen
-pad_token: <|finetune_right_pad|>

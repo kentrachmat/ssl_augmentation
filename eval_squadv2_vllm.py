@@ -97,8 +97,8 @@ def main():
     parser.add_argument("--model", default="/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline")
     parser.add_argument("--split", default="validation")
     parser.add_argument("--batch_size", type=int, default=8)
-    parser.add_argument("--max_new_tokens", type=int, default=64)
-    parser.add_argument("--max_input_tokens", type=int, default=3072)
+    parser.add_argument("--max_new_tokens", type=int, default=128)
+    parser.add_argument("--max_input_tokens", type=int, default=1024)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top_p", type=float, default=1.0)
     

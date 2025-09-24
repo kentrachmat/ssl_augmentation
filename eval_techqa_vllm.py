@@ -172,7 +172,7 @@ def main():
     torch.manual_seed(args.seed)
 
     
-    df = pd.read_csv("techqa.csv")
+    df = pd.read_csv("raw/techqa.csv")
         
     df = df[df['split'] == args.split]
     df_hf = df.copy()
