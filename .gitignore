@@ -4,3 +4,6 @@ embeddings/*.npy
 *.jsonl
 .eval_techqa_gpt.py
 .env
+
+runs_unslot*
+unsloth_compiled_cache/
