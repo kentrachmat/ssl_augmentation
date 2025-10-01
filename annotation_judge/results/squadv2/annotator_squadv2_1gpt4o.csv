@@ -1,0 +1,76 @@
+item_id,annotator,valid,reason,notes,type
+56bf79c73aeaaa14008c9671::SEM::0,gpt4o_1,1,,The context explicitly states that Girl's Tyme participated in and failed to win 'Star Search.' The answer is fully supported.,SEMANTIC
+56bf79c73aeaaa14008c9671::SEM::1,gpt4o_1,0,SPAN_MISSING,"The group was signed to Dwayne Wiggins's Grass Roots Entertainment in 1995, not Elektra Records.",SEMANTIC
+56bf79c73aeaaa14008c9671::SEM::2,gpt4o_1,1,,"The context explicitly states that Grass Roots Entertainment signed the group on October 5, 1995, making the answer correct and supported.",SEMANTIC
+56bf79c73aeaaa14008c9671::SYN::0,gpt4o_1,1,,"The context explicitly states that Beyoncé met LaTavia Roberson at age eight, making the answer fully supported.",SYNTACTIC
+56bf79c73aeaaa14008c9671::SYN::1,gpt4o_1,1,,"The answer 'age eight' is fully supported by the context, which states that Beyoncé met LaTavia Roberson at age eight.",SYNTACTIC
+56bf79c73aeaaa14008c9671::SYN::2,gpt4o_1,1,,"The question is a syntactic rewording of the context, and the answer 'age eight' is fully supported by the context.",SYNTACTIC
+56bf79c73aeaaa14008c9671::LEX::0,gpt4o_1,1,,The context explicitly states that Beyoncé was eight years old when she met LaTavia Roberson.,LEXICAL
+56bf79c73aeaaa14008c9671::LEX::1,gpt4o_1,1,,The context explicitly states that Beyoncé met LaTavia Roberson at age eight.,LEXICAL
+56bf79c73aeaaa14008c9671::LEX::2,gpt4o_1,1,,The context explicitly states that Beyoncé met LaTavia Roberson at age eight.,LEXICAL
+56bf8c8aa10cfb140055116c::SEM::0,gpt4o_1,1,,The answer 'Austin Powers in Goldmember' is fully supported by the context and correctly identifies the comedy film Beyoncé starred in alongside Mike Myers.,SEMANTIC
+56bf8c8aa10cfb140055116c::SEM::1,gpt4o_1,1,,The provided answer 'Fighting Temptation' is correct and fully supported by the context as the name of the song Beyoncé released from the soundtrack album of The Fighting Temptations.,SEMANTIC
+56bf8c8aa10cfb140055116c::SEM::2,gpt4o_1,1,,The context explicitly states that Beyoncé released 'Work It Out' as the lead single from the soundtrack album in 2002.,SEMANTIC
+56bf8c8aa10cfb140055116c::SYN::0,gpt4o_1,1,,The context explicitly states that Goldmember grossed $73 million in its first weekend atop the US box office.,SYNTACTIC
+56bf8c8aa10cfb140055116c::SYN::1,gpt4o_1,1,,"The answer is fully supported by the context, which states that 'Austin Powers in Goldmember' grossed $73 million in its first weekend.",SYNTACTIC
+56bf8c8aa10cfb140055116c::SYN::2,gpt4o_1,0,SPAN_MISSING,The provided answer omits the currency (US dollars) explicitly mentioned in the context.,SYNTACTIC
+56bf8c8aa10cfb140055116c::LEX::0,gpt4o_1,1,,"The context explicitly states that 'Goldmember' grossed $73 million, which matches the provided answer.",LEXICAL
+56bf8c8aa10cfb140055116c::LEX::1,gpt4o_1,0,SPAN_MISSING,"The context specifies that 'Austin Powers in Goldmember' grossed $73 million in its first weekend, but it does not provide the total earnings of the movie.",LEXICAL
+56bf8c8aa10cfb140055116c::LEX::2,gpt4o_1,0,SPAN_MISSING,"The context specifies that $73 million was earned during the first weekend, but does not provide the total box office earnings for 'Goldmember'.",LEXICAL
+56d4d9392ccc5a1400d8329f::SEM::0,gpt4o_1,0,SPAN_MISSING,"The answer 'Her tone and timbre' is correct but incomplete. The context also highlights her rhythmic vocal style, versatility, and ability to perform complex vocal runs as distinctive features.",SEMANTIC
+56d4d9392ccc5a1400d8329f::SEM::1,gpt4o_1,1,,"The answer correctly reflects the context, which mentions Beyoncé's integration of hip hop, balladry, gospel, and falsetto in her vocal style.",SEMANTIC
+56d4d9392ccc5a1400d8329f::SEM::2,gpt4o_1,0,SPAN_MISSING,"The provided answer omits other ways Beyoncé uses her voice to convey emotion, such as her use of melismas, vocal runs, and her versatility in exploring different styles like ballads, soul, and gospel.",SEMANTIC
+56d4d9392ccc5a1400d8329f::SYN::0,gpt4o_1,1,,"The answer is fully supported by the context, which states that her vocal abilities are why she is identified as the centerpiece of Destiny's Child.",SYNTACTIC
+56d4d9392ccc5a1400d8329f::SYN::1,gpt4o_1,1,,"The answer is fully supported by the context, which explicitly states her vocal abilities are why she is identified as the centerpiece of Destiny's Child.",SYNTACTIC
+56d4d9392ccc5a1400d8329f::SYN::2,gpt4o_1,1,,"The answer 'Her vocal abilities' is fully supported by the context, which states that her vocal abilities mean she is identified as the centerpiece of Destiny's Child.",SYNTACTIC
+56d4d9392ccc5a1400d8329f::LEX::0,gpt4o_1,1,,The context explicitly states that Beyoncé's vocal abilities make her the centerpiece of Destiny's Child.,LEXICAL
+56d4d9392ccc5a1400d8329f::LEX::1,gpt4o_1,1,,"The context explicitly states that Beyoncé's vocal abilities identify her as the centerpiece of Destiny's Child, making the answer fully supported and valid.",LEXICAL
+56d4d9392ccc5a1400d8329f::LEX::2,gpt4o_1,1,,The context explicitly states that Beyoncé's vocal abilities are the reason she is identified as the centerpiece of Destiny's Child.,LEXICAL
+56bec6763aeaaa14008c93f4::SEM::0,gpt4o_1,1,,The title 'Destiny's Style' is explicitly mentioned in the context as the book co-written by Beyoncé's mother.,SEMANTIC
+56bec6763aeaaa14008c93f4::SEM::1,gpt4o_1,1,,"The context explicitly states that People magazine recognized Beyoncé as the best-dressed celebrity, making the answer correct and valid.",SEMANTIC
+56bec6763aeaaa14008c93f4::SEM::2,gpt4o_1,1,,The answer 'Sports Illustrated Swimsuit Issue' is directly supported by the context and correctly identifies the name of the issue featuring Beyoncé in 2007.,SEMANTIC
+56bec6763aeaaa14008c93f4::SYN::0,gpt4o_1,1,,"The context explicitly states that Beyoncé's mother co-wrote a book, making the answer fully supported.",SYNTACTIC
+56bec6763aeaaa14008c93f4::SYN::1,gpt4o_1,1,,"The context explicitly states that Beyoncé's mother co-wrote the book, making the answer fully supported.",SYNTACTIC
+56bec6763aeaaa14008c93f4::SYN::2,gpt4o_1,1,,"The answer 'Her mother' is fully supported by the context, which states that Beyoncé's mother co-wrote the book.",SYNTACTIC
+56bec6763aeaaa14008c93f4::LEX::0,gpt4o_1,1,,"The context explicitly states that Beyoncé's mother co-wrote a book, making the provided answer correct and grounded.",LEXICAL
+56bec6763aeaaa14008c93f4::LEX::1,gpt4o_1,1,,"The context explicitly states that Beyoncé's mother co-wrote a book, making the answer 'Her mother' fully supported and valid.",LEXICAL
+56bec6763aeaaa14008c93f4::LEX::2,gpt4o_1,1,,"The context explicitly states that Beyoncé's mother co-wrote a book, making the answer correct and grounded.",LEXICAL
+56bfd351a10cfb1400551312::SEM::0,gpt4o_1,0,SPAN_MISSING,"The provided answer is too vague and omits specific details from the context, such as the names of influenced artists and other examples of her impact.",SEMANTIC
+56bfd351a10cfb1400551312::SEM::1,gpt4o_1,1,,The context explicitly states that Gwyneth Paltrow studied Beyoncé's performances for the 2010 film 'Country Strong'.,SEMANTIC
+56bfd351a10cfb1400551312::SEM::2,gpt4o_1,1,,"The answer is fully supported by the context, which explicitly states that Nicki Minaj was influenced by Beyoncé's Pepsi commercial.",SEMANTIC
+56bfd351a10cfb1400551312::SYN::0,gpt4o_1,0,SPAN_MISSING,"The provided answer 'work' is incomplete; the context specifies that Beyoncé's work influenced numerous artists and entertainers, but this alone does not fully address the reworded question.",SYNTACTIC
+56bfd351a10cfb1400551312::SYN::1,gpt4o_1,0,SPAN_MISSING,"The answer 'work' is incomplete; it does not fully address the question, which is about the influence on numerous artists and entertainers.",SYNTACTIC
+56bfd351a10cfb1400551312::SYN::2,gpt4o_1,0,SPAN_MISSING,The provided answer 'work' is incomplete; the full answer should specify 'Beyoncé's work' to match the context.,SYNTACTIC
+56bfd351a10cfb1400551312::LEX::0,gpt4o_1,1,,"The context explicitly states that Beyoncé's 'work' has influenced numerous artists, making the answer correct and grounded.",LEXICAL
+56bfd351a10cfb1400551312::LEX::1,gpt4o_1,1,,"The context explicitly mentions Beyoncé's 'work' as having influenced numerous artists, making the answer correct and grounded.",LEXICAL
+56bfd351a10cfb1400551312::LEX::2,gpt4o_1,0,SPAN_MISSING,"The answer 'work' is too vague and does not fully capture the context, which lists specific examples of her influence on other artists and projects.",LEXICAL
+56ce0a3762d2951400fa69d6::SEM::0,gpt4o_1,1,,"The context explicitly states that Chopin wrote primarily for the solo piano, making the answer correct and fully supported.",SEMANTIC
+56ce0a3762d2951400fa69d6::SEM::1,gpt4o_1,1,,"The context explicitly states that Chopin completed his musical education in Warsaw, making the answer fully supported and valid.",SEMANTIC
+56ce0a3762d2951400fa69d6::SEM::2,gpt4o_1,1,,"The context explicitly states that Chopin left Poland less than a month before the outbreak of the November 1830 Uprising, making the answer correct and grounded.",SEMANTIC
+56ce0a3762d2951400fa69d6::SYN::0,gpt4o_1,1,,"The answer '1810' is fully supported by the context, which states Chopin was born on 22 February or 1 March 1810.",SYNTACTIC
+56ce0a3762d2951400fa69d6::SYN::1,gpt4o_1,1,,"The answer '1810' is fully supported by the context, which states Chopin was born on 22 February or 1 March 1810.",SYNTACTIC
+56ce0a3762d2951400fa69d6::SYN::2,gpt4o_1,1,,"The birth year '1810' is directly supported by the context, making the answer valid.",SYNTACTIC
+56ce0a3762d2951400fa69d6::LEX::0,gpt4o_1,1,,"The context clearly states that Chopin was born in 1810, making the provided answer correct and grounded.",LEXICAL
+56ce0a3762d2951400fa69d6::LEX::1,gpt4o_1,1,,"The context explicitly states that Chopin was born in 1810, making the answer correct and grounded.",LEXICAL
+56ce0a3762d2951400fa69d6::LEX::2,gpt4o_1,0,SPAN_MISSING,"The context specifies two possible dates for Chopin's birth, 22 February or 1 March 1810. The answer '1810' is incomplete as it omits this detail.",LEXICAL
+56cbd8c66d243a140015ed88::SEM::0,gpt4o_1,1,,"The answer is supported by the context, which mentions Chopin's indirect association with political insurrection contributing to his status as a symbol of the Romantic era.",SEMANTIC
+56cbd8c66d243a140015ed88::SEM::1,gpt4o_1,1,,The answer is grounded in the context and accurately reflects the impact of Chopin's music on the public consciousness as described.,SEMANTIC
+56cbd8c66d243a140015ed88::SEM::2,gpt4o_1,0,SPAN_MISSING,"The provided answer omits key factors mentioned in the context, such as his music, association with political insurrection, and his symbolic status in the Romantic era.",SEMANTIC
+56cbd8c66d243a140015ed88::SYN::0,gpt4o_1,0,SPAN_MISSING,"The answer omits 'varying degrees of historical accuracy,' which is part of the context's description of the media about Chopin.",SYNTACTIC
+56cbd8c66d243a140015ed88::SYN::1,gpt4o_1,1,,The answer 'films and biographies' is fully supported by the context and accurately reflects the forms of media mentioned.,SYNTACTIC
+56cbd8c66d243a140015ed88::SYN::2,gpt4o_1,0,SPAN_MISSING,"The context specifies 'films and biographies of varying degrees of historical accuracy,' but the answer omits 'varying degrees of historical accuracy,' which is part of the context's detail.",SYNTACTIC
+56cbd8c66d243a140015ed88::LEX::0,gpt4o_1,1,,"The context mentions that Chopin has been the subject of numerous films and biographies, which matches the provided answer.",LEXICAL
+56cbd8c66d243a140015ed88::LEX::1,gpt4o_1,1,,"The context explicitly mentions that Chopin has been the subject of 'numerous films and biographies,' making the answer fully supported.",LEXICAL
+56cbd8c66d243a140015ed88::LEX::2,gpt4o_1,1,,The context explicitly mentions films and biographies as forms of artistic expression focusing on Chopin.,LEXICAL
+56cf6ca44df3c31400b0d779::SEM::0,gpt4o_1,1,,The context explicitly states that the November 1830 Uprising in Warsaw caused Woyciechowski to return to Poland.,SEMANTIC
+56cf6ca44df3c31400b0d779::SEM::1,gpt4o_1,1,,"The answer is fully supported by the context, which describes Chopin's anguish and journal entry after learning of the crushed uprising.",SEMANTIC
+56cf6ca44df3c31400b0d779::SEM::2,gpt4o_1,1,,"The context explicitly states that the November 1830 Uprising matured Chopin into an inspired national bard, as noted by Jachimecki.",SEMANTIC
+56cf6ca44df3c31400b0d779::SYN::0,gpt4o_1,1,,"The context explicitly states that Chopin, along with Woyciechowski, intended to go to Italy after Austria.",SYNTACTIC
+56cf6ca44df3c31400b0d779::SYN::1,gpt4o_1,1,,"The context explicitly states that Chopin intended to go on to Italy after Austria, making the answer fully supported.",SYNTACTIC
+56cf6ca44df3c31400b0d779::SYN::2,gpt4o_1,1,,"The answer 'Italy' is fully supported by the context, which states that Chopin intended to go on to Italy after Austria.",SYNTACTIC
+56cf6ca44df3c31400b0d779::LEX::0,gpt4o_1,1,,"The context explicitly states that Chopin, along with Woyciechowski, intended to go on to Italy after Austria.",LEXICAL
+56cf6ca44df3c31400b0d779::LEX::1,gpt4o_1,1,,"The context explicitly states that Chopin, along with Woyciechowski, intended to go on to Italy after heading to Austria, making the answer fully supported.",LEXICAL
+56cf6ca44df3c31400b0d779::LEX::2,gpt4o_1,1,,"The context explicitly states that Chopin, along with Woyciechowski, intended to go on to Italy after stopping in Austria.",LEXICAL
+56d3a9bb2ccc5a1400d82ddb::SEM::0,gpt4o_1,1,,The answer 'Chopiniana' is fully supported by the context as the name of the 1909 ballet that used Chopin's music.,SEMANTIC
+56d3a9bb2ccc5a1400d82ddb::SEM::1,gpt4o_1,1,,The context explicitly states that Sergei Diaghilev commissioned additional orchestrations for later productions of Les Sylphides.,SEMANTIC
+56d3a9bb2ccc5a1400d82ddb::SEM::2,gpt4o_1,1,,The answer correctly lists the individuals mentioned in the context who orchestrated music for the ballet besides Glazunov.,SEMANTIC
