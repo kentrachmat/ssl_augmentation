@@ -79,7 +79,11 @@ def load_squad_v2(split: str, limit: int | None) -> Tuple[pd.DataFrame, List[Dic
     examples = []
     for _, row in df.iterrows():
         answers = row["answers"] if isinstance(row["answers"], dict) else {"text": [], "answer_start": []}
-        gold_texts = answers["text"][0]
+        if len(answers["text"]) > 0 and answers["text"][0].strip():
+            gold_texts = answers["text"][0]
+        else:
+            gold_texts = "unanswerable"
+            
         examples.append({
             "id": row["id"],
             "question": row["question"],

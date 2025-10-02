@@ -2,31 +2,29 @@
 # -*- coding: utf-8 -*-
  
 import ast
-import os, json, ast, random, math, time, re
+import os, time 
 from pathlib import Path
-from typing import Dict, List, Tuple
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 import torch
 from datasets import Dataset, load_dataset
 from unsloth import FastLanguageModel
 from trl import SFTTrainer
 from transformers import TrainingArguments
+from transformers import DataCollatorForLanguageModeling
 
 import uuid, os
+
 RUN_ID = f"{time.strftime('%Y%m%d_%H%M%S')}_{os.getpid()}_{uuid.uuid4().hex[:6]}"
 
-
 DATA_DIR = Path(".")
-DS_SQUADV2_CSV = DATA_DIR / "final/ds_squadv2.csv"         # your base train set: id,title,context,question,answers
-AUG_CSV        = DATA_DIR / "final/ds_squadv2_aug.csv"      # augmented: aug_id,orig_id,type,question,answer,context,...
+DS_SQUADV2_CSV = DATA_DIR / "final/ds_squadv2.csv"     
+AUG_CSV        = DATA_DIR / "final/ds_squadv2_aug.csv"     
 
-# Model paths (from your message)
-MODELS: Dict[str, str] = {
-    "qwen":  "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
-    "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
+MODELS = {
+    # "qwen":  "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
+    # "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
     "gemma": "/export/home/cache/hub/unsloth-gemma-3-12b-it-offline",
 }
 
@@ -54,7 +52,6 @@ def extract_first_text(s):
             obj = ast.literal_eval(s)
             if isinstance(obj, dict):
                 arr = obj.get("text", [])
-                # handle numpy array case
                 if hasattr(arr, "tolist"):
                     arr = arr.tolist()
                 return (arr[0] if arr else None)
@@ -63,13 +60,13 @@ def extract_first_text(s):
     return None
 
 
-def read_csv_guessed(path: Path) -> pd.DataFrame:
+def read_csv_guessed(path):
     if not path.exists():
         raise FileNotFoundError(f"Missing file: {path}")
     return pd.read_csv(path)
  
 
-def to_chat_text(tokenizer, ctx: str, q: str, a: str) -> str:
+def to_chat_text(tokenizer, ctx, q, a):
     a = 'unanswerable' if a is None else a
     messages = [
         {"role": "system", "content": "You are a helpful assistant for extractive QA."},
@@ -78,7 +75,7 @@ def to_chat_text(tokenizer, ctx: str, q: str, a: str) -> str:
     ]
     return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=False)
 
-def build_dev(ds_base_ids: set, dev_n: int = 300, seed: int = 1337) -> pd.DataFrame:
+def build_dev(ds_base_ids, dev_n = 300, seed = 1337):
     """Pick 300 items from SQuAD train that are NOT in ds_squadv2.csv by id."""
     df_train = load_dataset("/home/brachmat/phd/datasets/squad_v2", split='train')
     df_train = df_train.to_pandas()
@@ -98,7 +95,7 @@ def build_dev(ds_base_ids: set, dev_n: int = 300, seed: int = 1337) -> pd.DataFr
     )
     return dev[["id","title","context","question","answer"]]
 
-def load_baseline_train() -> pd.DataFrame:
+def load_baseline_train():
     df = read_csv_guessed(DS_SQUADV2_CSV).copy()
     need = ["id","title","context","question","answers"]
     for c in need:
@@ -109,12 +106,7 @@ def load_baseline_train() -> pd.DataFrame:
     df["answer"] = df["answers"].apply(extract_first_text)
     return df[["id","title","context","question","answer"]].copy()
 
-def load_aug_subset(kind: str) -> pd.DataFrame:
-    """
-    kind in {"SEMANTIC","SYNTACTIC","LEXICAL"}
-    We accept 'type' or 'structure_type' columns and normalize to uppercase.
-    Requires columns: question, answer, context (orig fields okay; we prefer non-orig).
-    """
+def load_aug_subset(kind): 
     df = read_csv_guessed(AUG_CSV).copy()
     # pick label column
     type_col = None
@@ -148,10 +140,21 @@ def load_aug_subset(kind: str) -> pd.DataFrame:
     })
     return out.reset_index(drop=True)
 
-def df_to_sft_dataset(df: pd.DataFrame, tokenizer) -> Dataset:
-    # Convert to a single text field with chat template applied
-    texts = [to_chat_text(tokenizer, r["context"], r["question"], r["answer"]) for _, r in df.iterrows()]
+def df_to_sft_dataset(df, tokenizer):
+    def _safe_str(x):
+        return "" if x is None or (isinstance(x, float) and np.isnan(x)) else str(x)
+
+    texts = []
+    for _, r in df.iterrows():
+        ctx = _safe_str(r["context"])
+        q   = _safe_str(r["question"])
+        a   = r["answer"]
+        a   = "unanswerable" if a is None or (isinstance(a, float) and np.isnan(a)) else str(a)
+        txt = to_chat_text(tokenizer, ctx, q, a)  
+        texts.append(txt)
+
     return Dataset.from_dict({"text": texts})
+
 
 def lora_targets_for(model_name_or_path: str):
     name = model_name_or_path.lower()
@@ -162,7 +165,7 @@ def lora_targets_for(model_name_or_path: str):
     return ["q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj"]
 
 
-def load_model_tokenizer(path: str, max_seq_len: int = MAX_SEQ_LEN):
+def load_model_tokenizer(path):
     model, tokenizer = FastLanguageModel.from_pretrained(
     model_name=path,
     max_seq_length=MAX_SEQ_LEN,
@@ -171,6 +174,13 @@ def load_model_tokenizer(path: str, max_seq_len: int = MAX_SEQ_LEN):
     trust_remote_code=True,
     use_gradient_checkpointing="unsloth",
     )
+    
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "right"
+    tokenizer.model_max_length = MAX_SEQ_LEN
+    model.config.pad_token_id = tokenizer.pad_token_id
+    model.config.eos_token_id = tokenizer.eos_token_id
     
     # LoRA 
     model = FastLanguageModel.get_peft_model(
@@ -191,29 +201,9 @@ def train_one(model_id: str,
               run_dir: Path):
 
     run_dir.mkdir(parents=True, exist_ok=True)
-    model, tokenizer = load_model_tokenizer(model_path, MAX_SEQ_LEN)
+    model, tokenizer = load_model_tokenizer(model_path)
     train_ds = df_to_sft_dataset(train_df, tokenizer)
     dev_ds   = df_to_sft_dataset(dev_df, tokenizer)
-
-    # args = TrainingArguments(
-    #     output_dir = str(run_dir),
-    #     num_train_epochs = NUM_EPOCHS,
-    #     per_device_train_batch_size = BATCH_PER_DEVICE,
-    #     per_device_eval_batch_size = max(1, BATCH_PER_DEVICE*2),
-    #     gradient_accumulation_steps = GRAD_ACCUM,
-    #     learning_rate = LEARNING_RATE,
-    #     warmup_ratio = WARMUP_RATIO,
-    #     lr_scheduler_type = "cosine",
-    #     bf16 = torch.cuda.is_available(),  # use bf16 if possible
-    #     fp16 = False,
-    #     logging_steps = LOGGING_STEPS,
-    #     save_strategy = "epoch",
-    #     eval_strategy = "epoch",
-    #     report_to = "none",
-    #     seed = seed,
-    #     dataloader_num_workers = 2,
-    # )
-     
 
     args = TrainingArguments(
         output_dir=str(run_dir),
@@ -234,7 +224,7 @@ def train_one(model_id: str,
         lr_scheduler_type="cosine",
         warmup_ratio=WARMUP_RATIO,        
         max_grad_norm=1.0,
-        optim="adamw_torch_fused",        # fast on H100 if available
+        optim="adamw_torch_fused",
 
         # precision
         bf16=torch.cuda.is_available(),  
@@ -264,21 +254,19 @@ def train_one(model_id: str,
         save_safetensors=True,
     )
 
-
     trainer = SFTTrainer(
-        model = model,
-        tokenizer = tokenizer,
-        train_dataset = train_ds,
-        eval_dataset  = dev_ds,
-        dataset_text_field = "text",
-        max_seq_length = MAX_SEQ_LEN,
-        packing = False,
-        args = args,
+        model=model,
+        tokenizer=tokenizer,
+        train_dataset=train_ds,
+        eval_dataset=dev_ds,
+        dataset_text_field="text",
+        max_seq_length=MAX_SEQ_LEN,
+        packing=False,
+        args=args,
         formatting_func=None,
     )
-
-    train_result = trainer.train()
-    # Save final adapter and tokenizer
+    
+    trainer.train()
     trainer.save_model()         
     tokenizer.save_pretrained(run_dir)
 
@@ -300,64 +288,7 @@ def train_one(model_id: str,
 
     return run_dir
 
-def aggregate_and_plot(group_dirs: List[Path], out_png: Path, title: str):
-    """
-    Combine epoch_losses.csv from multiple seeds and plot mean ± std for eval_loss.
-    Also plot (dashed) mean train_loss if available.
-    """
-    frames = []
-    for d in group_dirs:
-        f = d / "epoch_losses.csv"
-        if f.exists():
-            df = pd.read_csv(f)
-            df["run"] = d.name
-            frames.append(df)
-    if not frames:
-        print(f"[WARN] No epoch_losses.csv found in {group_dirs}")
-        return
-    all_df = pd.concat(frames, ignore_index=True)
-    # Aggregate per epoch
-    agg = all_df.groupby("epoch").agg(
-        eval_mean=("eval_loss","mean"),
-        eval_std =("eval_loss","std"),
-        train_mean=("train_loss","mean"),
-        train_std =("train_loss","std"),
-        n=("eval_loss","count"),
-    ).reset_index()
-
-    # Plot
-    plt.figure(figsize=(7, 5))
-    x = agg["epoch"]
-    y = agg["eval_mean"]
-    yerr = agg["eval_std"].fillna(0.0)
-    plt.plot(x, y, label="eval_loss (mean)")
-    plt.fill_between(x, y - yerr, y + yerr, alpha=0.2)
-
-    # train (dashed)
-    if "train_mean" in agg.columns and not agg["train_mean"].isna().all():
-        t = agg["train_mean"]
-        terr = agg["train_std"].fillna(0.0)
-        plt.plot(x, t, linestyle="--", label="train_loss (mean)")
-        plt.fill_between(x, t - terr, t + terr, alpha=0.1)
-
-    plt.xlabel("Epoch")
-    plt.ylabel("Loss")
-    plt.title(title)
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    out_png.parent.mkdir(parents=True, exist_ok=True)
-    plt.tight_layout()
-    plt.savefig(out_png, dpi=150)
-    plt.close()
-    # Also save aggregated CSV
-    agg.to_csv(out_png.with_suffix(".csv"), index=False)
-
-# ----------------------------
-# MAIN orchestration
-# ----------------------------
-
 def main():
-    # Load baseline to define "present IDs", and build a STABLE dev set once
     base = load_baseline_train()
     base_ids = set(base["id"].astype(str).tolist())
     dev = build_dev(base_ids, dev_n=300, seed=1337)
@@ -365,7 +296,6 @@ def main():
     dev.to_csv(dev_path, index=False)
     print(f"[INFO] Dev set saved -> {dev_path}  (size={len(dev)})")
 
-    # Define train sets for 4 configs
     TRAIN_BUILDERS = {
         "baseline":   lambda: base,
         "semantic":   lambda: load_aug_subset("SEMANTIC"),
@@ -374,9 +304,9 @@ def main():
     }
 
     # Iterate models and configs
-    all_groups: List[Tuple[str,str,List[Path]]] = []  # (model_key, cfg, run_dirs)
-    timestamp = time.strftime("%Y%m%d_%H%M%S")
-
+    all_groups= [] 
+    print(TRAIN_BUILDERS)
+    exit()
     for model_key, model_path in MODELS.items():
         for cfg_name, builder in TRAIN_BUILDERS.items():
             print(f"\n=== {model_key} | {cfg_name} ===")
@@ -399,13 +329,6 @@ def main():
                 run_dirs.append(run_dir)
 
             all_groups.append((model_key, cfg_name, run_dirs))
-
-    # Aggregate & plot per (model, config)
-    for model_key, cfg_name, run_dirs in all_groups:
-        out_png = OUT_ROOT / "plots" / f"{model_key}_{cfg_name}_loss.png"
-        title = f"{model_key} - {cfg_name} (10 epochs, {len(SEEDS)} runs)"
-        aggregate_and_plot(run_dirs, out_png, title)
-        print(f"[PLOT] {out_png}")
 
 if __name__ == "__main__":
     main()
