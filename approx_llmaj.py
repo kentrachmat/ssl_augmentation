@@ -3,6 +3,11 @@ from typing import List, Dict, Any
 import torch
 import pandas as pd
 from unsloth import FastLanguageModel
+import os
+
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ.get("CUDA_VISIBLE_DEVICES", "0")
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 
 MODEL_PATH = "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-70B-Instruct-offline"
 INPUT_JSONL = "results/predictions_squadv2_llama.jsonl"
@@ -41,7 +46,6 @@ USER_TMPL = (
 
 LABEL_MAP = {"A": "YES", "B": "NO", "C": "UNSURE"}
 
-
 DTYPE            = torch.float16
 DEVICE           = "cuda"
 BATCH_SIZE       = 4
@@ -49,19 +53,7 @@ MAX_NEW_TOKENS   = 256
 CTX_LEN          = 4096
 AGGREGATION      = "max"  
 
-# torch.backends.cuda.matmul.allow_tf32 = True
-# torch.set_float32_matmul_precision("high")
-# os.environ.setdefault("CUDA_DEVICE_MAX_CONNECTIONS", "1")
-# os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
-
-# --------------------------
-# CHAT TEMPLATE
-# --------------------------
-def build_chat(messages: List[Dict[str, str]]) -> str:
-    """
-    Llama 3-style chat template.
-    We leave the assistant header open at the end so we can append the label token ('A'/'B'/'C').
-    """
+def build_chat(messages): 
     out = []
     for m in messages:
         role = m["role"]
@@ -83,11 +75,11 @@ def read_jsonl(path: str) -> List[Dict[str, Any]]:
                 rows.append(json.loads(line))
     return rows
 
-def chunked(xs: List[Any], n: int):
+def chunked(xs, n):
     for i in range(0, len(xs), n):
         yield xs[i:i+n]
 
-def parse_reason_json(text: str) -> Dict[str, str]:
+def parse_reason_json(text: str):
     """
     Extract the first JSON object from text and return reason/notes/label (if present).
     If no JSON found, return blanks.
@@ -106,11 +98,7 @@ def parse_reason_json(text: str) -> Dict[str, str]:
     except Exception:
         return {"label": "", "reason": "", "notes": ""}
 
-def vocab_prefix_id_sets(tokenizer) -> Dict[str, List[int]]:
-    """
-    Collect token IDs whose decoded string (stripped) starts with 'A' / 'B' / 'C'.
-    This covers variants like 'A', 'A ', 'A\\n', etc.
-    """
+def vocab_prefix_id_sets(tokenizer): 
     id2tok = {v: k for k, v in tokenizer.get_vocab().items()}
     buckets = {"A": [], "B": [], "C": []}
     for tid in id2tok:
@@ -128,7 +116,7 @@ def vocab_prefix_id_sets(tokenizer) -> Dict[str, List[int]]:
 
 def pool_probs(vec: torch.Tensor, ids: List[int], how: str = "max") -> torch.Tensor:
     """
-    Pool probability for a bucket: 'max' ≈ probability of the first label token (paper §4.4.1),
+    Pool probability for a bucket: 'max' ≈ probability of the first label token,
     'sum' = total mass of all tokens starting with that label.
     vec: [vocab_size] probabilities for one example.
     """
@@ -161,7 +149,7 @@ def judge_rows_singlepass(model, tokenizer, rows: List[Dict[str, Any]]) -> List[
     abc_buckets = vocab_prefix_id_sets(tokenizer)
     abc_union: List[int] = sorted(set(abc_buckets["A"] + abc_buckets["B"] + abc_buckets["C"]))
 
-    results: List[Dict[str, Any]] = []
+    results= []
 
     for batch_rows, batch_prompts in zip(chunked(rows, BATCH_SIZE), chunked(prompts, BATCH_SIZE)):
         # 1) Tokenize prompts
@@ -298,6 +286,14 @@ def judge_rows_singlepass(model, tokenizer, rows: List[Dict[str, Any]]) -> List[
 # MAIN
 # --------------------------
 def main():
+    
+    import torch, os
+    print("Visible GPUs:", torch.cuda.device_count())
+    for i in range(torch.cuda.device_count()):
+        print(i, torch.cuda.get_device_name(i))
+    print("CUDA_VISIBLE_DEVICES =", os.environ.get("CUDA_VISIBLE_DEVICES"))
+    
+    
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA not available. Check drivers / container / nvidia-smi.")
 
@@ -306,10 +302,11 @@ def main():
         MODEL_PATH,
         load_in_4bit=False,                  
         dtype=DTYPE,
-        device_map="auto",
+        device_map={"": "cuda:1"},
         max_seq_length=CTX_LEN,
         attn_implementation="sdpa",
-    )
+    ) 
+
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token_id = tokenizer.eos_token_id
     tokenizer.model_max_length = CTX_LEN
@@ -321,6 +318,7 @@ def main():
     results = judge_rows_singlepass(model, tokenizer, rows)
     pd.DataFrame(results).to_csv(OUTPUT_CSV, index=False)
     print(f"[Done] Saved {len(results)} rows → {OUTPUT_CSV}")
+
 
 if __name__ == "__main__":
     main()

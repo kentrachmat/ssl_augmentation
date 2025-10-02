@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 import torch
-from datasets import Dataset, load_dataset
+from datasets import Dataset, load_dataset 
 from unsloth import FastLanguageModel
 from trl import SFTTrainer
 from transformers import TrainingArguments
@@ -23,9 +23,9 @@ DS_SQUADV2_CSV = DATA_DIR / "final/ds_squadv2.csv"
 AUG_CSV        = DATA_DIR / "final/ds_squadv2_aug.csv"     
 
 MODELS = {
-    # "qwen":  "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
-    # "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
     "gemma": "/export/home/cache/hub/unsloth-gemma-3-12b-it-offline",
+    "qwen":  "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
+    "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
 }
 
 # Output root
@@ -65,7 +65,6 @@ def read_csv_guessed(path):
         raise FileNotFoundError(f"Missing file: {path}")
     return pd.read_csv(path)
  
-
 def to_chat_text(tokenizer, ctx, q, a):
     a = 'unanswerable' if a is None else a
     messages = [
@@ -101,7 +100,6 @@ def load_baseline_train():
     for c in need:
         if c not in df.columns:
             raise ValueError(f"ds_squadv2.csv missing column '{c}'")
-
 
     df["answer"] = df["answers"].apply(extract_first_text)
     return df[["id","title","context","question","answer"]].copy()
@@ -193,8 +191,7 @@ def load_model_tokenizer(path):
     model.config.use_cache = False
     return model, tokenizer
 
-def train_one(model_id: str,
-              model_path: str,
+def train_one(model_path: str,
               train_df: pd.DataFrame,
               dev_df: pd.DataFrame,
               seed: int,
@@ -204,6 +201,23 @@ def train_one(model_id: str,
     model, tokenizer = load_model_tokenizer(model_path)
     train_ds = df_to_sft_dataset(train_df, tokenizer)
     dev_ds   = df_to_sft_dataset(dev_df, tokenizer)
+    
+    def _tok(examples):
+        return tokenizer(
+            examples["text"],
+            truncation=True,
+            padding=True,            
+            max_length=MAX_SEQ_LEN,
+            return_attention_mask=True,
+        )
+
+    train_tok = train_ds.map(_tok, batched=True, remove_columns=["text"])
+    dev_tok   = dev_ds.map(_tok,   batched=True, remove_columns=["text"])
+
+    collator = DataCollatorForLanguageModeling(
+        tokenizer=tokenizer,
+        mlm=False,
+    )
 
     args = TrainingArguments(
         output_dir=str(run_dir),
@@ -246,26 +260,26 @@ def train_one(model_id: str,
         dataloader_num_workers=2,
         dataloader_pin_memory=True,
         remove_unused_columns=False,      
-        group_by_length=True,            
+        group_by_length=True,    
         
         # misc
         seed=seed,
         run_name=str(run_dir.name),
         save_safetensors=True,
+        
     )
 
     trainer = SFTTrainer(
         model=model,
         tokenizer=tokenizer,
-        train_dataset=train_ds,
-        eval_dataset=dev_ds,
-        dataset_text_field="text",
+        train_dataset=train_tok,
+        eval_dataset=dev_tok,
         max_seq_length=MAX_SEQ_LEN,
         packing=False,
         args=args,
-        formatting_func=None,
+        data_collator=collator,
     )
-    
+
     trainer.train()
     trainer.save_model()         
     tokenizer.save_pretrained(run_dir)
@@ -301,12 +315,17 @@ def main():
         "semantic":   lambda: load_aug_subset("SEMANTIC"),
         "syntactic":  lambda: load_aug_subset("SYNTACTIC"),
         "lexical":    lambda: load_aug_subset("LEXICAL"),
-    }
+        "all":        lambda: pd.concat([
+                            base,
+                            load_aug_subset("SEMANTIC"),
+                            load_aug_subset("SYNTACTIC"),
+                            load_aug_subset("LEXICAL"),
+                        ], ignore_index=True),
+        }
 
     # Iterate models and configs
     all_groups= [] 
-    print(TRAIN_BUILDERS)
-    exit()
+
     for model_key, model_path in MODELS.items():
         for cfg_name, builder in TRAIN_BUILDERS.items():
             print(f"\n=== {model_key} | {cfg_name} ===")
@@ -318,8 +337,7 @@ def main():
                 run_dir = OUT_ROOT / f"{RUN_ID}_{model_key}_{cfg_name}_seed{seed}"
 
                 print(f"[RUN] {run_dir}")
-                train_one(
-                    model_id = model_key,
+                train_one( 
                     model_path = model_path,
                     train_df = train_df,
                     dev_df = dev,
