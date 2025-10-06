@@ -1,121 +1,122 @@
 item_id,annotator,valid,reason,notes,type
-56bf79c73aeaaa14008c9671::SEM::0,thomas,1.0,,,SEMANTIC
-56bf79c73aeaaa14008c9671::SEM::1,thomas,1.0,,,SEMANTIC
-56bf79c73aeaaa14008c9671::SEM::2,thomas,1.0,,,SEMANTIC
-56bf79c73aeaaa14008c9671::SYN::0,thomas,1.0,,,SYNTACTIC
-56bf79c73aeaaa14008c9671::SYN::1,thomas,0.0,OTHER,How old was Beyoncé when she Latavia Roberson ? La formulation est étrange,SYNTACTIC
-56bf79c73aeaaa14008c9671::SYN::2,thomas,0.0,OTHER,"It also changes the wording, I am not sure that it count as wrong",SYNTACTIC
-56bf79c73aeaaa14008c9671::LEX::0,thomas,1.0,,OK,LEXICAL
-56bf79c73aeaaa14008c9671::LEX::1,thomas,1.0,,OK,LEXICAL
-56bf79c73aeaaa14008c9671::LEX::2,thomas,1.0,,OK,LEXICAL
-56bf8c8aa10cfb140055116c::SEM::0,thomas,,,,SEMANTIC
-56bf8c8aa10cfb140055116c::SEM::1,thomas,,,,SEMANTIC
-56bf8c8aa10cfb140055116c::SEM::2,thomas,,,,SEMANTIC
-56bf8c8aa10cfb140055116c::SYN::0,thomas,,,,SYNTACTIC
-56bf8c8aa10cfb140055116c::SYN::1,thomas,,,,SYNTACTIC
-56bf8c8aa10cfb140055116c::SYN::2,thomas,,,,SYNTACTIC
-56bf8c8aa10cfb140055116c::LEX::0,thomas,,,,LEXICAL
-56bf8c8aa10cfb140055116c::LEX::1,thomas,,,,LEXICAL
-56bf8c8aa10cfb140055116c::LEX::2,thomas,,,,LEXICAL
-56d4d9392ccc5a1400d8329f::SEM::0,thomas,,,,SEMANTIC
-56d4d9392ccc5a1400d8329f::SEM::1,thomas,,,,SEMANTIC
-56d4d9392ccc5a1400d8329f::SEM::2,thomas,,,,SEMANTIC
-56d4d9392ccc5a1400d8329f::SYN::0,thomas,,,,SYNTACTIC
-56d4d9392ccc5a1400d8329f::SYN::1,thomas,,,,SYNTACTIC
-56d4d9392ccc5a1400d8329f::SYN::2,thomas,,,,SYNTACTIC
-56d4d9392ccc5a1400d8329f::LEX::0,thomas,,,,LEXICAL
-56d4d9392ccc5a1400d8329f::LEX::1,thomas,,,,LEXICAL
-56d4d9392ccc5a1400d8329f::LEX::2,thomas,,,,LEXICAL
-56bec6763aeaaa14008c93f4::SEM::0,thomas,,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SEM::1,thomas,,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SEM::2,thomas,,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SYN::0,thomas,,,,SYNTACTIC
-56bec6763aeaaa14008c93f4::SYN::1,thomas,,,,SYNTACTIC
-56bec6763aeaaa14008c93f4::SYN::2,thomas,,,,SYNTACTIC
-56bec6763aeaaa14008c93f4::LEX::0,thomas,,,,LEXICAL
-56bec6763aeaaa14008c93f4::LEX::1,thomas,,,,LEXICAL
-56bec6763aeaaa14008c93f4::LEX::2,thomas,,,,LEXICAL
-56bfd351a10cfb1400551312::SEM::0,thomas,,,,SEMANTIC
-56bfd351a10cfb1400551312::SEM::1,thomas,,,,SEMANTIC
-56bfd351a10cfb1400551312::SEM::2,thomas,,,,SEMANTIC
-56bfd351a10cfb1400551312::SYN::0,thomas,,,,SYNTACTIC
-56bfd351a10cfb1400551312::SYN::1,thomas,,,,SYNTACTIC
-56bfd351a10cfb1400551312::SYN::2,thomas,,,,SYNTACTIC
-56bfd351a10cfb1400551312::LEX::0,thomas,,,,LEXICAL
-56bfd351a10cfb1400551312::LEX::1,thomas,,,,LEXICAL
-56bfd351a10cfb1400551312::LEX::2,thomas,,,,LEXICAL
-56ce0a3762d2951400fa69d6::SEM::0,thomas,,,,SEMANTIC
-56ce0a3762d2951400fa69d6::SEM::1,thomas,,,,SEMANTIC
-56ce0a3762d2951400fa69d6::SEM::2,thomas,,,,SEMANTIC
-56ce0a3762d2951400fa69d6::SYN::0,thomas,,,,SYNTACTIC
-56ce0a3762d2951400fa69d6::SYN::1,thomas,,,,SYNTACTIC
-56ce0a3762d2951400fa69d6::SYN::2,thomas,,,,SYNTACTIC
-56ce0a3762d2951400fa69d6::LEX::0,thomas,,,,LEXICAL
-56ce0a3762d2951400fa69d6::LEX::1,thomas,,,,LEXICAL
-56ce0a3762d2951400fa69d6::LEX::2,thomas,,,,LEXICAL
-56cbd8c66d243a140015ed88::SEM::0,thomas,,,,SEMANTIC
-56cbd8c66d243a140015ed88::SEM::1,thomas,,,,SEMANTIC
-56cbd8c66d243a140015ed88::SEM::2,thomas,,,,SEMANTIC
-56cbd8c66d243a140015ed88::SYN::0,thomas,,,,SYNTACTIC
-56cbd8c66d243a140015ed88::SYN::1,thomas,,,,SYNTACTIC
-56cbd8c66d243a140015ed88::SYN::2,thomas,,,,SYNTACTIC
-56cbd8c66d243a140015ed88::LEX::0,thomas,,,,LEXICAL
-56cbd8c66d243a140015ed88::LEX::1,thomas,,,,LEXICAL
-56cbd8c66d243a140015ed88::LEX::2,thomas,,,,LEXICAL
-56cf6ca44df3c31400b0d779::SEM::0,thomas,,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SEM::1,thomas,,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SEM::2,thomas,,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SYN::0,thomas,,,,SYNTACTIC
-56cf6ca44df3c31400b0d779::SYN::1,thomas,,,,SYNTACTIC
-56cf6ca44df3c31400b0d779::SYN::2,thomas,,,,SYNTACTIC
-56cf6ca44df3c31400b0d779::LEX::0,thomas,,,,LEXICAL
-56cf6ca44df3c31400b0d779::LEX::1,thomas,,,,LEXICAL
-56cf6ca44df3c31400b0d779::LEX::2,thomas,,,,LEXICAL
-56d3a9bb2ccc5a1400d82ddb::SEM::0,thomas,,,,SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SEM::1,thomas,,,,SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SEM::2,thomas,,,,SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::0,thomas,,,,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::1,thomas,,,,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::2,thomas,,,,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::LEX::0,thomas,,,,LEXICAL
-56d3a9bb2ccc5a1400d82ddb::LEX::1,thomas,,,,LEXICAL
-56d3a9bb2ccc5a1400d82ddb::LEX::2,thomas,,,,LEXICAL
-56ccf12b62d2951400fa64f3::SEM::0,thomas,,,,SEMANTIC
-56ccf12b62d2951400fa64f3::SEM::1,thomas,,,,SEMANTIC
-56ccf12b62d2951400fa64f3::SEM::2,thomas,,,,SEMANTIC
-56ccf12b62d2951400fa64f3::SYN::0,thomas,,,,SYNTACTIC
-56ccf12b62d2951400fa64f3::SYN::1,thomas,,,,SYNTACTIC
-56ccf12b62d2951400fa64f3::SYN::2,thomas,,,,SYNTACTIC
-56ccf12b62d2951400fa64f3::LEX::0,thomas,,,,LEXICAL
-56ccf12b62d2951400fa64f3::LEX::1,thomas,,,,LEXICAL
-56ccf12b62d2951400fa64f3::LEX::2,thomas,,,,LEXICAL
-56ce750daab44d1400b887b1::SEM::0,thomas,,,,SEMANTIC
-56ce750daab44d1400b887b1::SEM::1,thomas,,,,SEMANTIC
-56ce750daab44d1400b887b1::SEM::2,thomas,,,,SEMANTIC
-56ce750daab44d1400b887b1::SYN::0,thomas,,,,SYNTACTIC
-56ce750daab44d1400b887b1::SYN::1,thomas,,,,SYNTACTIC
-56ce750daab44d1400b887b1::SYN::2,thomas,,,,SYNTACTIC
-56ce750daab44d1400b887b1::LEX::0,thomas,,,,LEXICAL
-56ce750daab44d1400b887b1::LEX::1,thomas,,,,LEXICAL
-56ce750daab44d1400b887b1::LEX::2,thomas,,,,LEXICAL
-56cd7db262d2951400fa663a::SEM::0,thomas,,,,SEMANTIC
-56cd7db262d2951400fa663a::SEM::1,thomas,,,,SEMANTIC
-56cd7db262d2951400fa663a::SEM::2,thomas,,,,SEMANTIC
-56cd7db262d2951400fa663a::SYN::0,thomas,,,,SYNTACTIC
-56cd7db262d2951400fa663a::SYN::1,thomas,,,,SYNTACTIC
-56cd7db262d2951400fa663a::SYN::2,thomas,,,,SYNTACTIC
-56cd7db262d2951400fa663a::LEX::0,thomas,,,,LEXICAL
-56cd7db262d2951400fa663a::LEX::1,thomas,,,,LEXICAL
-56cd7db262d2951400fa663a::LEX::2,thomas,,,,LEXICAL
-56cd8c5762d2951400fa66aa::SEM::0,thomas,,,,SEMANTIC
-56cd8c5762d2951400fa66aa::SEM::1,thomas,,,,SEMANTIC
-56cd8c5762d2951400fa66aa::SEM::2,thomas,,,,SEMANTIC
-56cd8c5762d2951400fa66aa::SYN::0,thomas,,,,SYNTACTIC
-56cd8c5762d2951400fa66aa::SYN::1,thomas,,,,SYNTACTIC
-56cd8c5762d2951400fa66aa::SYN::2,thomas,,,,SYNTACTIC
-56cd8c5762d2951400fa66aa::LEX::0,thomas,,,,LEXICAL
-56cd8c5762d2951400fa66aa::LEX::1,thomas,,,,LEXICAL
-56cd8c5762d2951400fa66aa::LEX::2,thomas,,,,LEXICAL
+56bf79c73aeaaa14008c9671::SEM::0,thomas,1,,,SEMANTIC
+56bf79c73aeaaa14008c9671::SEM::1,thomas,1,,,SEMANTIC
+56bf79c73aeaaa14008c9671::SEM::2,thomas,1,,,SEMANTIC
+56bf79c73aeaaa14008c9671::SYN::0,thomas,1,,,SYNTACTIC
+56bf79c73aeaaa14008c9671::SYN::1,thomas,0,OTHER,How old was Beyoncé when she Latavia Roberson ? La formulation est étrange,SYNTACTIC
+56bf79c73aeaaa14008c9671::SYN::2,thomas,0,OTHER,"It also changes the wording, I am not sure that it count as wrong",SYNTACTIC
+56bf79c73aeaaa14008c9671::LEX::0,thomas,1,,OK,LEXICAL
+56bf79c73aeaaa14008c9671::LEX::1,thomas,1,,OK,LEXICAL
+56bf79c73aeaaa14008c9671::LEX::2,thomas,1,,OK,LEXICAL
+56bf8c8aa10cfb140055116c::SEM::0,thomas,1,,,SEMANTIC
+56bf8c8aa10cfb140055116c::SEM::1,thomas,0,HALLUCINATION,,SEMANTIC
+56bf8c8aa10cfb140055116c::SEM::2,thomas,1,,,SEMANTIC
+56bf8c8aa10cfb140055116c::SYN::0,thomas,1,,,SYNTACTIC
+56bf8c8aa10cfb140055116c::SYN::1,thomas,0,"OTHER, SPAN_MISSING",,SYNTACTIC
+56bf8c8aa10cfb140055116c::SYN::2,thomas,1,,,SYNTACTIC
+56bf8c8aa10cfb140055116c::LEX::0,thomas,1,,,LEXICAL
+56bf8c8aa10cfb140055116c::LEX::1,thomas,1,,,LEXICAL
+56bf8c8aa10cfb140055116c::LEX::2,thomas,1,,,LEXICAL
+56d4d9392ccc5a1400d8329f::SEM::0,thomas,0,SPAN_MISSING,vocal range spans ?,SEMANTIC
+56d4d9392ccc5a1400d8329f::SEM::1,thomas,0,SPAN_MISSING,"power ballads, soul, rock belting, operatic flourishes, and hip hop.balladry, gospel and falsetto. ",SEMANTIC
+56d4d9392ccc5a1400d8329f::SEM::2,thomas,0,OTHER,,SEMANTIC
+56d4d9392ccc5a1400d8329f::SYN::0,thomas,1,,,SYNTACTIC
+56d4d9392ccc5a1400d8329f::SYN::1,thomas,1,,,SYNTACTIC
+56d4d9392ccc5a1400d8329f::SYN::2,thomas,1,,,SYNTACTIC
+56d4d9392ccc5a1400d8329f::LEX::0,thomas,1,,,LEXICAL
+56d4d9392ccc5a1400d8329f::LEX::1,thomas,1,,,LEXICAL
+56d4d9392ccc5a1400d8329f::LEX::2,thomas,1,,,LEXICAL
+56bec6763aeaaa14008c93f4::SEM::0,thomas,1,,,SEMANTIC
+56bec6763aeaaa14008c93f4::SEM::1,thomas,1,,,SEMANTIC
+56bec6763aeaaa14008c93f4::SEM::2,thomas,1,,,SEMANTIC
+56bec6763aeaaa14008c93f4::SYN::0,thomas,0,OTHER,weird formulation,SYNTACTIC
+56bec6763aeaaa14008c93f4::SYN::1,thomas,0,OTHER,"which parent of Beyoncé co-written a book ?
+",SYNTACTIC
+56bec6763aeaaa14008c93f4::SYN::2,thomas,0,OTHER,,SYNTACTIC
+56bec6763aeaaa14008c93f4::LEX::0,thomas,1,,,LEXICAL
+56bec6763aeaaa14008c93f4::LEX::1,thomas,1,,,LEXICAL
+56bec6763aeaaa14008c93f4::LEX::2,thomas,1,,,LEXICAL
+56bfd351a10cfb1400551312::SEM::0,thomas,0,OTHER,Who ?,SEMANTIC
+56bfd351a10cfb1400551312::SEM::1,thomas,1,,but weird question,SEMANTIC
+56bfd351a10cfb1400551312::SEM::2,thomas,1,,,SEMANTIC
+56bfd351a10cfb1400551312::SYN::0,thomas,0,OTHER,not a question,SYNTACTIC
+56bfd351a10cfb1400551312::SYN::1,thomas,0,OTHER,not a question,SYNTACTIC
+56bfd351a10cfb1400551312::SYN::2,thomas,1,,,SYNTACTIC
+56bfd351a10cfb1400551312::LEX::0,thomas,1,,,LEXICAL
+56bfd351a10cfb1400551312::LEX::1,thomas,1,,The ground truth is weird...,LEXICAL
+56bfd351a10cfb1400551312::LEX::2,thomas,1,,,LEXICAL
+56ce0a3762d2951400fa69d6::SEM::0,thomas,1,,,SEMANTIC
+56ce0a3762d2951400fa69d6::SEM::1,thomas,1,,,SEMANTIC
+56ce0a3762d2951400fa69d6::SEM::2,thomas,1,,,SEMANTIC
+56ce0a3762d2951400fa69d6::SYN::0,thomas,1,,,SYNTACTIC
+56ce0a3762d2951400fa69d6::SYN::1,thomas,1,,,SYNTACTIC
+56ce0a3762d2951400fa69d6::SYN::2,thomas,1,,Maybe more lexical ??,SYNTACTIC
+56ce0a3762d2951400fa69d6::LEX::0,thomas,1,,,LEXICAL
+56ce0a3762d2951400fa69d6::LEX::1,thomas,1,,,LEXICAL
+56ce0a3762d2951400fa69d6::LEX::2,thomas,1,,,LEXICAL
+56cbd8c66d243a140015ed88::SEM::0,thomas,1,,,SEMANTIC
+56cbd8c66d243a140015ed88::SEM::1,thomas,1,,,SEMANTIC
+56cbd8c66d243a140015ed88::SEM::2,thomas,0,HALLUCINATION,But maybe right but not given the context,SEMANTIC
+56cbd8c66d243a140015ed88::SYN::0,thomas,1,,,SYNTACTIC
+56cbd8c66d243a140015ed88::SYN::1,thomas,1,,,SYNTACTIC
+56cbd8c66d243a140015ed88::SYN::2,thomas,1,,,SYNTACTIC
+56cbd8c66d243a140015ed88::LEX::0,thomas,1,,,LEXICAL
+56cbd8c66d243a140015ed88::LEX::1,thomas,1,,,LEXICAL
+56cbd8c66d243a140015ed88::LEX::2,thomas,1,,but not totally convinced,LEXICAL
+56cf6ca44df3c31400b0d779::SEM::0,thomas,1,,,SEMANTIC
+56cf6ca44df3c31400b0d779::SEM::1,thomas,0,AMBIGUOUS,I do not think it as about leaving his homeland,SEMANTIC
+56cf6ca44df3c31400b0d779::SEM::2,thomas,1,,,SEMANTIC
+56cf6ca44df3c31400b0d779::SYN::0,thomas,1,,,SYNTACTIC
+56cf6ca44df3c31400b0d779::SYN::1,thomas,1,,,SYNTACTIC
+56cf6ca44df3c31400b0d779::SYN::2,thomas,1,,,SYNTACTIC
+56cf6ca44df3c31400b0d779::LEX::0,thomas,1,,,LEXICAL
+56cf6ca44df3c31400b0d779::LEX::1,thomas,1,,,LEXICAL
+56cf6ca44df3c31400b0d779::LEX::2,thomas,1,,,LEXICAL
+56d3a9bb2ccc5a1400d82ddb::SEM::0,thomas,1,,,SEMANTIC
+56d3a9bb2ccc5a1400d82ddb::SEM::1,thomas,1,,,SEMANTIC
+56d3a9bb2ccc5a1400d82ddb::SEM::2,thomas,1,,,SEMANTIC
+56d3a9bb2ccc5a1400d82ddb::SYN::0,thomas,1,,,SYNTACTIC
+56d3a9bb2ccc5a1400d82ddb::SYN::1,thomas,1,,,SYNTACTIC
+56d3a9bb2ccc5a1400d82ddb::SYN::2,thomas,0,OTHER,weird,SYNTACTIC
+56d3a9bb2ccc5a1400d82ddb::LEX::0,thomas,0,OUT_OF_SCOPE,it is clearly syntactic and not lexical,LEXICAL
+56d3a9bb2ccc5a1400d82ddb::LEX::1,thomas,1,,But maybe mor syntacti,LEXICAL
+56d3a9bb2ccc5a1400d82ddb::LEX::2,thomas,1,,,LEXICAL
+56ccf12b62d2951400fa64f3::SEM::0,thomas,0,AMBIGUOUS,Answer issue (but the context is not present),SEMANTIC
+56ccf12b62d2951400fa64f3::SEM::1,thomas,1,,,SEMANTIC
+56ccf12b62d2951400fa64f3::SEM::2,thomas,1,,,SEMANTIC
+56ccf12b62d2951400fa64f3::SYN::0,thomas,1,,In my opinion is not a description but I set it correct cause the gold question is also similar,SYNTACTIC
+56ccf12b62d2951400fa64f3::SYN::1,thomas,1,,,SYNTACTIC
+56ccf12b62d2951400fa64f3::SYN::2,thomas,1,,,SYNTACTIC
+56ccf12b62d2951400fa64f3::LEX::0,thomas,1,,,LEXICAL
+56ccf12b62d2951400fa64f3::LEX::1,thomas,1,,,LEXICAL
+56ccf12b62d2951400fa64f3::LEX::2,thomas,1,,,LEXICAL
+56ce750daab44d1400b887b1::SEM::0,thomas,1,,,SEMANTIC
+56ce750daab44d1400b887b1::SEM::1,thomas,1,,,SEMANTIC
+56ce750daab44d1400b887b1::SEM::2,thomas,1,,,SEMANTIC
+56ce750daab44d1400b887b1::SYN::0,thomas,1,,it  depends on the current date,SYNTACTIC
+56ce750daab44d1400b887b1::SYN::1,thomas,1,,,SYNTACTIC
+56ce750daab44d1400b887b1::SYN::2,thomas,0,OTHER,,SYNTACTIC
+56ce750daab44d1400b887b1::LEX::0,thomas,1,,,LEXICAL
+56ce750daab44d1400b887b1::LEX::1,thomas,1,,,LEXICAL
+56ce750daab44d1400b887b1::LEX::2,thomas,1,,,LEXICAL
+56cd7db262d2951400fa663a::SEM::0,thomas,1,,,SEMANTIC
+56cd7db262d2951400fa663a::SEM::1,thomas,0,SPAN_MISSING,,SEMANTIC
+56cd7db262d2951400fa663a::SEM::2,thomas,0,HALLUCINATION,2 years after,SEMANTIC
+56cd7db262d2951400fa663a::SYN::0,thomas,1,,,SYNTACTIC
+56cd7db262d2951400fa663a::SYN::1,thomas,0,OUT_OF_SCOPE,,SYNTACTIC
+56cd7db262d2951400fa663a::SYN::2,thomas,1,,,SYNTACTIC
+56cd7db262d2951400fa663a::LEX::0,thomas,1,,,LEXICAL
+56cd7db262d2951400fa663a::LEX::1,thomas,1,,,LEXICAL
+56cd7db262d2951400fa663a::LEX::2,thomas,1,,,LEXICAL
+56cd8c5762d2951400fa66aa::SEM::0,thomas,1,,,SEMANTIC
+56cd8c5762d2951400fa66aa::SEM::1,thomas,1,,,SEMANTIC
+56cd8c5762d2951400fa66aa::SEM::2,thomas,1,,,SEMANTIC
+56cd8c5762d2951400fa66aa::SYN::0,thomas,0,OTHER,,SYNTACTIC
+56cd8c5762d2951400fa66aa::SYN::1,thomas,1,,,SYNTACTIC
+56cd8c5762d2951400fa66aa::SYN::2,thomas,1,,,SYNTACTIC
+56cd8c5762d2951400fa66aa::LEX::0,thomas,0,"OTHER, DUPLICATE",,LEXICAL
+56cd8c5762d2951400fa66aa::LEX::1,thomas,1,,,LEXICAL
+56cd8c5762d2951400fa66aa::LEX::2,thomas,0,OTHER,,LEXICAL
 56cd96c162d2951400fa675b::SEM::0,thomas,,,,SEMANTIC
 56cd96c162d2951400fa675b::SEM::1,thomas,,,,SEMANTIC
 56cd96c162d2951400fa675b::SEM::2,thomas,,,,SEMANTIC

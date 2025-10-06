@@ -6,6 +6,12 @@ load_dotenv()
 
 import os, sys, json, time, argparse, re
 from typing import Dict, Any
+
+import json, re, time, argparse, sys
+from typing import Any, Dict, List, Optional
+from statistics import mean
+
+
 import pandas as pd
 
 from openai import OpenAI
@@ -93,8 +99,7 @@ def get_system_prompt(t: str) -> str:
     if t_norm == "syntactic":
         return PROMPT_SYNTACTIC
     if t_norm == "LEXICAL":
-        return PROMPT_LEXICAL
-    # default to Semantic if unknown
+        return PROMPT_LEXICAL 
     return PROMPT_SEMANTIC
 
 USER_TMPL = """TYPE: {type}
@@ -110,11 +115,11 @@ PROVIDED_ANSWER:
 
 VALID_REASONS = {"", "SPAN_MISSING", "HALLUCINATION", "AMBIGUOUS", "OUT_OF_SCOPE", "DUPLICATE", "OTHER"}
 
+
 def extract_first_json(text: str) -> Dict[str, Any]:
     s = text.strip()
     s = re.sub(r"^```(?:json)?\s*|\s*```$", "", s, flags=re.IGNORECASE | re.DOTALL).strip()
-    start = s.find("{")
-    end = s.rfind("}")
+    start = s.find("{"); end = s.rfind("}")
     if start == -1 or end == -1 or end < start:
         raise ValueError("No JSON object found in response.")
     return json.loads(s[start:end + 1])
@@ -133,6 +138,41 @@ def force_json(response_text: str) -> Dict[str, Any]:
     data = extract_first_json(response_text)
     return normalize_schema(data)
 
+def _extract_logprob_payload(choice) -> Dict[str, Any]:
+    """
+    Returns:
+      {
+        "tokens": [{"token": str, "logprob": float, "top": [{"token": str, "logprob": float}, ...]} ...],
+        "avg_logprob": float,
+        "sum_logprob": float,
+        "num_tokens": int
+      }
+    """
+    lp = getattr(choice, "logprobs", None)
+    tokens = []
+    if lp and getattr(lp, "content", None):
+        for step in lp.content: 
+            top = []
+            if getattr(step, "top_logprobs", None):
+                for alt in step.top_logprobs:
+                    top.append({
+                        "token": getattr(alt, "token", None),
+                        "logprob": float(getattr(alt, "logprob", None)),
+                    })
+            tokens.append({
+                "token": getattr(step, "token", None),
+                "logprob": float(getattr(step, "logprob", None)),
+                "top": top,
+            })
+
+    vals = [t["logprob"] for t in tokens if t.get("logprob") is not None]
+    return {
+        "tokens": tokens,
+        "avg_logprob": (mean(vals) if vals else None),
+        "sum_logprob": (sum(vals) if vals else None),
+        "num_tokens": len(tokens),
+    }
+
 def judge_once(system_prompt: str, user_msg: str) -> Dict[str, Any]:
     resp = client.chat.completions.create(
         model=DEPLOYMENT,
@@ -142,8 +182,20 @@ def judge_once(system_prompt: str, user_msg: str) -> Dict[str, Any]:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_msg},
         ],
+        logprobs=True,         
+        top_logprobs=5,         
     )
-    return force_json(resp.choices[0].message.content)
+    
+    choice = resp.choices[0]
+    result = force_json(choice.message.content)
+
+    lp_payload = _extract_logprob_payload(choice)
+    result["avg_logprob"] = lp_payload["avg_logprob"]
+    result["sum_logprob"] = lp_payload["sum_logprob"]
+    result["num_tokens"] = lp_payload["num_tokens"] 
+    
+    result["logprobs_json"] = json.dumps(lp_payload["tokens"], ensure_ascii=False, separators=(",", ":"))
+    return result
 
 def call_judge(row_type: str, context: str, question: str, answer: str, max_retries: int = 3) -> Dict[str, Any]:
     system_prompt = get_system_prompt(row_type)
@@ -154,8 +206,12 @@ def call_judge(row_type: str, context: str, question: str, answer: str, max_retr
             return judge_once(system_prompt, user_msg)
         except Exception as e:
             last_err = e
-            time.sleep(0.5 * attempt)  # tiny backoff
-    return {"valid": 0, "reason": "OTHER", "notes": f"Parsing/LLM error: {type(last_err).__name__}: {last_err}"}
+            time.sleep(0.5 * attempt)
+    return {
+        "valid": 0, "reason": "OTHER",
+        "notes": f"Parsing/LLM error: {type(last_err).__name__}: {last_err}",
+        "avg_logprob": None, "sum_logprob": None, "num_tokens": 0, "logprobs_json": "[]"
+    }
 
 def main():
     ap = argparse.ArgumentParser(description="LLM-as-Judge for augmented QA validity (Semantic/Syntactic/Lexical).")
@@ -176,15 +232,15 @@ def main():
         df = df.iloc[:args.limit].copy()
 
     val_list, reason_list, notes_list = [], [], []
+    avg_lp_list, sum_lp_list, n_tok_list, lp_json_list = [], [], [], []
 
     for i, row in df.iterrows():
         t = str(row.get("type", "")).strip()
         context = "" if pd.isna(row.get("context")) else str(row.get("context"))
         question = "" if pd.isna(row.get("question")) else str(row.get("question"))
 
-        # --- Answer fallback ---
         if pd.isna(row.get("answer")) or str(row.get("answer")).strip() == "":
-            answer = "" if pd.isna(row.get("orig_answer")) else str(row.get("orig_answer"))
+            answer = "" if pd.isna(row.get("original_answer")) else str(row.get("original_answer"))
         else:
             answer = str(row.get("answer"))
 
@@ -192,22 +248,35 @@ def main():
         val_list.append(int(out["valid"]))
         reason_list.append(out["reason"])
         notes_list.append(out["notes"])
+        avg_lp_list.append(out.get("avg_logprob"))
+        sum_lp_list.append(out.get("sum_logprob"))
+        n_tok_list.append(out.get("num_tokens"))
+        lp_json_list.append(out.get("logprobs_json", "[]"))
 
         if (i + 1) % 25 == 0:
             print(f"[Info] Judged {i + 1}/{len(df)} items...", file=sys.stderr)
 
     df["valid"] = val_list
     df["reason"] = reason_list
-    df["notes"] = notes_list 
+    df["notes"] = notes_list
+    df["avg_logprob"] = avg_lp_list
+    df["sum_logprob"] = sum_lp_list
+    df["num_tokens"] = n_tok_list
+    df["logprobs_json"] = lp_json_list  
 
     out_df = pd.DataFrame({
-        "item_id": df['aug_id'],        
-        "annotator": args.name,        
+        "item_id": df["aug_id"],
+        "annotator": args.name,
         "valid": df["valid"],
         "reason": df["reason"],
-        "notes": df["notes"]
+        "notes": df["notes"],
+        "avg_logprob": df["avg_logprob"],
+        "sum_logprob": df["sum_logprob"],
+        "num_tokens": df["num_tokens"],
+        "logprobs_json": df["logprobs_json"],
     })
 
     out_df.to_csv(f"results/annotator_{args.dataset}_{args.name}.csv", index=False)
+
 if __name__ == "__main__":
     main()
