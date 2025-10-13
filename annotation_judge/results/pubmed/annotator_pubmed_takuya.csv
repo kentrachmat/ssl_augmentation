@@ -1,73 +1,73 @@
-item_id,annotator,valid,reason,notes,type
-27825344::SEM::0,takuya,,,,SEMANTIC
-27825344::SEM::1,takuya,,,,SEMANTIC
-27825344::SYN::0,takuya,,,,SYNTACTIC
-27825344::SYN::1,takuya,,,,SYNTACTIC
-27825344::LEX::0,takuya,,,,LEXICAL
-27825344::LEX::1,takuya,,,,LEXICAL
-20709047::SEM::0,takuya,1,,,SEMANTIC
-20709047::SEM::1,takuya,1,,,SEMANTIC
-20709047::SYN::0,takuya,0,"OUT_OF_SCOPE, OTHER","No passive. ""cathether"" not explicitely mentioned in the text",SYNTACTIC
-20709047::SYN::1,takuya,0,"OUT_OF_SCOPE, OTHER","No passive. ""cathether"" not explicitely mentioned in the text",SYNTACTIC
-20709047::LEX::0,takuya,1,,,LEXICAL
-20709047::LEX::1,takuya,1,,,LEXICAL
-18309156::SEM::0,takuya,1,,,SEMANTIC
-18309156::SEM::1,takuya,1,,,SEMANTIC
-18309156::SYN::0,takuya,0,OTHER,It's not passive,SYNTACTIC
-18309156::SYN::1,takuya,1,,,SYNTACTIC
-18309156::LEX::0,takuya,1,,,LEXICAL
-18309156::LEX::1,takuya,1,,,LEXICAL
-10210992::SEM::0,takuya,,,,SEMANTIC
-10210992::SEM::1,takuya,,,,SEMANTIC
-10210992::SYN::0,takuya,,,,SYNTACTIC
-10210992::SYN::1,takuya,,,,SYNTACTIC
-10210992::LEX::0,takuya,,,,LEXICAL
-10210992::LEX::1,takuya,,,,LEXICAL
-20875914::SEM::0,takuya,,,,SEMANTIC
-20875914::SEM::1,takuya,,,,SEMANTIC
-20875914::SYN::0,takuya,,,,SYNTACTIC
-20875914::SYN::1,takuya,,,,SYNTACTIC
-20875914::LEX::0,takuya,,,,LEXICAL
-20875914::LEX::1,takuya,,,,LEXICAL
-27709690::SEM::0,takuya,,,,SEMANTIC
-27709690::SEM::1,takuya,,,,SEMANTIC
-27709690::SYN::0,takuya,,,,SYNTACTIC
-27709690::SYN::1,takuya,,,,SYNTACTIC
-27709690::LEX::0,takuya,,,,LEXICAL
-27709690::LEX::1,takuya,,,,LEXICAL
-15898994::SEM::0,takuya,,,,SEMANTIC
-15898994::SEM::1,takuya,,,,SEMANTIC
-15898994::SYN::0,takuya,,,,SYNTACTIC
-15898994::SYN::1,takuya,,,,SYNTACTIC
-15898994::LEX::0,takuya,,,,LEXICAL
-15898994::LEX::1,takuya,,,,LEXICAL
-7486157::SEM::0,takuya,,,,SEMANTIC
-7486157::SEM::1,takuya,,,,SEMANTIC
-7486157::SYN::0,takuya,,,,SYNTACTIC
-7486157::SYN::1,takuya,,,,SYNTACTIC
-7486157::LEX::0,takuya,,,,LEXICAL
-7486157::LEX::1,takuya,,,,LEXICAL
-22580862::SEM::0,takuya,,,,SEMANTIC
-22580862::SEM::1,takuya,,,,SEMANTIC
-22580862::SYN::0,takuya,,,,SYNTACTIC
-22580862::SYN::1,takuya,,,,SYNTACTIC
-22580862::LEX::0,takuya,,,,LEXICAL
-22580862::LEX::1,takuya,,,,LEXICAL
-16871451::SEM::0,takuya,,,,SEMANTIC
-16871451::SEM::1,takuya,,,,SEMANTIC
-16871451::SYN::0,takuya,,,,SYNTACTIC
-16871451::SYN::1,takuya,,,,SYNTACTIC
-16871451::LEX::0,takuya,,,,LEXICAL
-16871451::LEX::1,takuya,,,,LEXICAL
-26990556::SEM::0,takuya,,,,SEMANTIC
-26990556::SEM::1,takuya,,,,SEMANTIC
-26990556::SYN::0,takuya,,,,SYNTACTIC
-26990556::SYN::1,takuya,,,,SYNTACTIC
-26990556::LEX::0,takuya,,,,LEXICAL
-26990556::LEX::1,takuya,,,,LEXICAL
-17802829::SEM::0,takuya,,,,SEMANTIC
-17802829::SEM::1,takuya,,,,SEMANTIC
-17802829::SYN::0,takuya,,,,SYNTACTIC
-17802829::SYN::1,takuya,,,,SYNTACTIC
-17802829::LEX::0,takuya,,,,LEXICAL
-17802829::LEX::1,takuya,,,,LEXICAL
+item_id,annotator,valid,confidence_scale,reason,notes,type
+27825344::SEM::0,takuya,0,5,OTHER,"The original Q not grammatical. A part from this fact, the generated Q&A pair is ok.",SEMANTIC
+27825344::SEM::1,takuya,0,5,OTHER,"The original Q not grammatical. A part from this fact, the generated Q&A pair is ok.",SEMANTIC
+27825344::SYN::0,takuya,1,5,,,SYNTACTIC
+27825344::SYN::1,takuya,1,5,,Even if there's no passive.,SYNTACTIC
+27825344::LEX::0,takuya,1,5,,,LEXICAL
+27825344::LEX::1,takuya,1,5,,The change is minimal.,LEXICAL
+20709047::SEM::0,takuya,1,5,,,SEMANTIC
+20709047::SEM::1,takuya,1,5,,,SEMANTIC
+20709047::SYN::0,takuya,-1,5,"OUT_OF_SCOPE","No passive. ""cathether"" not explicitely mentioned in the text",SYNTACTIC
+20709047::SYN::1,takuya,-1,5,"OUT_OF_SCOPE","No passive. ""cathether"" not explicitely mentioned in the text",SYNTACTIC
+20709047::LEX::0,takuya,1,5,,,LEXICAL
+20709047::LEX::1,takuya,1,5,,,LEXICAL
+18309156::SEM::0,takuya,1,5,,,SEMANTIC
+18309156::SEM::1,takuya,1,5,,,SEMANTIC
+18309156::SYN::0,takuya,-1,5,OTHER,It's not passive,SYNTACTIC
+18309156::SYN::1,takuya,1,5,,,SYNTACTIC
+18309156::LEX::0,takuya,1,5,,,LEXICAL
+18309156::LEX::1,takuya,1,5,,,LEXICAL
+10210992::SEM::0,takuya,1,5,,,SEMANTIC
+10210992::SEM::1,takuya,1,5,,,SEMANTIC
+10210992::SYN::0,takuya,-1,5,OTHER,The Q&A pair does not match.,SYNTACTIC
+10210992::SYN::1,takuya,-1,5,OTHER,Not passive,SYNTACTIC
+10210992::LEX::0,takuya,0,5,,The Q well formed but is the A correct?,LEXICAL
+10210992::LEX::1,takuya,0,5,,The Q well formed but is the A correct?,LEXICAL
+20875914::SEM::0,takuya,1,5,,,SEMANTIC
+20875914::SEM::1,takuya,1,5,,,SEMANTIC
+20875914::SYN::0,takuya,-1,5,OTHER,NO PASSIVE,SYNTACTIC
+20875914::SYN::1,takuya,-1,5,OTHER,The Q is a copular sentence; the distinction active/passive does not applicate,SYNTACTIC
+20875914::LEX::0,takuya,0,5,,The Q well formed but the (original) A infers what is not clearly demonstrated,LEXICAL
+20875914::LEX::1,takuya,-1,5,DUPLICATE,The same Q as the one before,LEXICAL
+27709690::SEM::0,takuya,-1,5,OUT_OF_SCOPE,"The Q = ok. In the A, ""based on..."" is not pertinent",SEMANTIC
+27709690::SEM::1,takuya,-1,5,DUPLICATE,The Q is minimally modified wrt the precedent one,SEMANTIC
+27709690::SYN::0,takuya,-1,5,OTHER,NO PASSIVE,SYNTACTIC
+27709690::SYN::1,takuya,-1,5,OTHER,NO PASSIVE,SYNTACTIC
+27709690::LEX::0,takuya,0,5,,"The Q = ok, the original A is out of scope",LEXICAL
+27709690::LEX::1,takuya,0,5,,"The Q = ok, the original A contains more info than necessary.",LEXICAL
+15898994::SEM::0,takuya,1,5,,,SEMANTIC
+15898994::SEM::1,takuya,1,5,,,SEMANTIC
+15898994::SYN::0,takuya,1,5,,,SYNTACTIC
+15898994::SYN::1,takuya,1,5,,"Btw, the objective is to make the system generate a question so it is useless to ask it to generate an ""interrogative"" variant; it must do that without asking",SYNTACTIC
+15898994::LEX::0,takuya,1,5,,,LEXICAL
+15898994::LEX::1,takuya,1,5,,,LEXICAL
+7486157::SEM::0,takuya,1,5,,,SEMANTIC
+7486157::SEM::1,takuya,1,5,,,SEMANTIC
+7486157::SYN::0,takuya,-1,5,OTHER,"Btw, the objective is to make the system generate a question so it is useless to ask it to generate an ""interrogative"" variant; it must do that without asking",SYNTACTIC
+7486157::SYN::1,takuya,0,5,,"""Rewordinig"" wrt the original Q? If so, it's respected but the Q generated is the same as the previous one",SYNTACTIC
+7486157::LEX::0,takuya,0,5,,The changes observed concern the constituent order with respect to the two previous Qs,LEXICAL
+7486157::LEX::1,takuya,0,5,,A minimal change of the constituent order and of a preposition wrt the previous Q ,LEXICAL
+22580862::SEM::0,takuya,1,5,,,SEMANTIC
+22580862::SEM::1,takuya,1,5,,Rewording of the precedent one but correct Q-A pair,SEMANTIC
+22580862::SYN::0,takuya,-1,5,OUT_OF_SCOPE,The Q is ok (even if it's difficult to assess the degree of complexitiy required). The original A is out of scope.,SYNTACTIC
+22580862::SYN::1,takuya,-1,5,OUT_OF_SCOPE,The Q is ok (it's a passive sentence). The original A is out of scope.,SYNTACTIC
+22580862::LEX::0,takuya,-1,5,OUT_OF_SCOPE,The Q is ok. The original A out of scope (as for the HPV 18; the A confirms one of the research Q abusively).,LEXICAL
+22580862::LEX::1,takuya,-1,5,DUPLICATE,The same as the previous one.,LEXICAL
+16871451::SEM::0,takuya,-1,5,OUT_OF_SCOPE,"The Q asks about HPV 18 but nothing is said about that in the A, which is factually correct but seems partial from a pragmatic pov.",SEMANTIC
+16871451::SEM::1,takuya,-1,5,OUT_OF_SCOPE,Nothing is said about the effect of HPV 18 exposure.,SEMANTIC
+16871451::SYN::0,takuya,-1,5,OUT_OF_SCOPE,The A contains the information on HPV18 which is not described explicitely.,SYNTACTIC
+16871451::SYN::1,takuya,-1,5,OUT_OF_SCOPE,"The Q is not passive, which is not pertinent any more but the problem of the orginal A remains.",SYNTACTIC
+16871451::LEX::0,takuya,-1,5,OUT_OF_SCOPE,The Q OK,LEXICAL
+16871451::LEX::1,takuya,-1,5,OUT_OF_SCOPE,The Q OK,LEXICAL
+26990556::SEM::0,takuya,1,5,,,SEMANTIC
+26990556::SEM::1,takuya,1,5,,,SEMANTIC
+26990556::SYN::0,takuya,-1,5,OUT_OF_SCOPE,"The Q is ok (even if it's not a passive sent.) but the last part of the original A ""the cellular response to exogenous AJL1 may suggest a novel agent for cancer gene therapy"" is an inference needing the extra-textual knowledge;",SYNTACTIC
+26990556::SYN::1,takuya,-1,5,OUT_OF_SCOPE,"The Q is ok (even if it's not a passive sent.) but the last part of the original A ""the cellular response to exogenous AJL1 may suggest a novel agent for cancer gene therapy"" is an inference needing the extra-textual knowledge;",SYNTACTIC
+26990556::LEX::0,takuya,-1,5,OUT_OF_SCOPE,"The Q is ok but the last part of the original A ""the cellular response to exogenous AJL1 may suggest a novel agent for cancer gene therapy"" is an inference needing the extra-textual knowledge;",LEXICAL
+26990556::LEX::1,takuya,-1,5,OUT_OF_SCOPE,"The Q is ok but the last part of the original A ""the cellular response to exogenous AJL1 may suggest a novel agent for cancer gene therapy"" is an inference needing the extra-textual knowledge;",LEXICAL
+17802829::SEM::0,takuya,-1,5,OTHER,The generated Q&A pair is ok but the original Q is not a good sentence.,SEMANTIC
+17802829::SEM::1,takuya,-1,5,OTHER,The generated Q&A pair is ok but the original Q is not a good sentence.,SEMANTIC
+17802829::SYN::0,takuya,-1,5,OTHER,"The Q is ill-formed: the use of the term ""research"" is strange, as it is the case of the original Q, not to mention the fact that there's no passive.",SYNTACTIC
+17802829::SYN::1,takuya,1,5,,,SYNTACTIC
+17802829::LEX::0,takuya,-1,5,OTHER,"The Q is ill-formed: the use of the term ""research"" is strange, as it is the case of the original Q.",LEXICAL
+17802829::LEX::1,takuya,-1,5,DUPLICATE,"The same Q as the precedent one, the difference is the presence or absence of a space.",LEXICAL

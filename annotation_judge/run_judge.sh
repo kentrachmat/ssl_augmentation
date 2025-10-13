@@ -2,7 +2,7 @@
 set -e
 
 # Paths
-SQUAD_INPUT="../final/ds_squadv2_aug.csv"
+SQUAD_INPUT="../augmented_squad_train.csv"
 PUBMED_INPUT="../augmented_pubmed_train.csv"
 
 # Run for SQuADv2
@@ -13,7 +13,7 @@ do
         --input "$SQUAD_INPUT" \
         --name "gpt4o_$i" \
         --dataset "squadv2" \
-        --limit 125
+        --limit 80
 done 
 
 # Run for PUBMED
@@ -24,7 +24,7 @@ do
         --input "$PUBMED_INPUT" \
         --name "gpt4o_$i" \
         --dataset "pubmed" \
-        --limit 75
+        --limit 80
 done 
 
 echo "[Done] All runs completed."

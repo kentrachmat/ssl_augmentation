@@ -1,217 +1,76 @@
-item_id,annotator,valid,reason,notes,type
-56bf79c73aeaaa14008c9671::SEM::0,takuya,1,,,SEMANTIC
-56bf79c73aeaaa14008c9671::SEM::1,takuya,0,OTHER,How can it be sure that the first contract happened in 1995?,SEMANTIC
-56bf79c73aeaaa14008c9671::SEM::2,takuya,1,,,SEMANTIC
-56bf79c73aeaaa14008c9671::SYN::0,takuya,1,,,SYNTACTIC
-56bf79c73aeaaa14008c9671::SYN::1,takuya,1,,"without inversion, the Q has a pragmatically marked meaning (echo-question, for ex.)",SYNTACTIC
-56bf79c73aeaaa14008c9671::SYN::2,takuya,0,OTHER,"Why is this a ""complex"" Q? The main sentence ""how old was B.?"" is a ""simple sentence""",SYNTACTIC
-56bf79c73aeaaa14008c9671::LEX::0,takuya,1,,,LEXICAL
-56bf79c73aeaaa14008c9671::LEX::1,takuya,1,,,LEXICAL
-56bf79c73aeaaa14008c9671::LEX::2,takuya,1,,,LEXICAL
-56bf8c8aa10cfb140055116c::SEM::0,takuya,1,,,SEMANTIC
-56bf8c8aa10cfb140055116c::SEM::1,takuya,0,SPAN_MISSING,"Contextually, from the same album, another song was single released (Summertime).",SEMANTIC
-56bf8c8aa10cfb140055116c::SEM::2,takuya,1,,,SEMANTIC
-56bf8c8aa10cfb140055116c::SYN::0,takuya,1,,with a lexical change (gross -> make),SYNTACTIC
-56bf8c8aa10cfb140055116c::SYN::1,takuya,0,OTHER,Passive sentence required but the generated Q is not passive,SYNTACTIC
-56bf8c8aa10cfb140055116c::SYN::2,takuya,1,,(The film grossed X large amount -> What large amount was grossed by the film = simple),SYNTACTIC
-56bf8c8aa10cfb140055116c::LEX::0,takuya,1,,,LEXICAL
-56bf8c8aa10cfb140055116c::LEX::1,takuya,1,,,LEXICAL
-56bf8c8aa10cfb140055116c::LEX::2,takuya,1,,,LEXICAL
-56d4d9392ccc5a1400d8329f::SEM::0,takuya,1,,,SEMANTIC
-56d4d9392ccc5a1400d8329f::SEM::1,takuya,0,SPAN_MISSING,,SEMANTIC
-56d4d9392ccc5a1400d8329f::SEM::2,takuya,0,OUT_OF_SCOPE,"Where does ""convey emotion"" come from? ",SEMANTIC
-56d4d9392ccc5a1400d8329f::SYN::0,takuya,1,,,SYNTACTIC
-56d4d9392ccc5a1400d8329f::SYN::1,takuya,0,OTHER,"No subordination, it's a simple sentence",SYNTACTIC
-56d4d9392ccc5a1400d8329f::SYN::2,takuya,1,,,SYNTACTIC
-56d4d9392ccc5a1400d8329f::LEX::0,takuya,1,,,LEXICAL
-56d4d9392ccc5a1400d8329f::LEX::1,takuya,1,,,LEXICAL
-56d4d9392ccc5a1400d8329f::LEX::2,takuya,1,,,LEXICAL
-56bec6763aeaaa14008c93f4::SEM::0,takuya,1,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SEM::1,takuya,1,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SEM::2,takuya,1,,,SEMANTIC
-56bec6763aeaaa14008c93f4::SYN::0,takuya,1,,,SYNTACTIC
-56bec6763aeaaa14008c93f4::SYN::1,takuya,0,OTHER,VERY STRANGE SENTENCE,SYNTACTIC
-56bec6763aeaaa14008c93f4::SYN::2,takuya,0,OTHER,VERY STRANGE SENTENCE,SYNTACTIC
-56bec6763aeaaa14008c93f4::LEX::0,takuya,1,,,LEXICAL
-56bec6763aeaaa14008c93f4::LEX::1,takuya,1,,,LEXICAL
-56bec6763aeaaa14008c93f4::LEX::2,takuya,1,,,LEXICAL
-56bfd351a10cfb1400551312::SEM::0,takuya,0,"OTHER, AMBIGUOUS",The initial Q is ill-formed,SEMANTIC
-56bfd351a10cfb1400551312::SEM::1,takuya,1,,,SEMANTIC
-56bfd351a10cfb1400551312::SEM::2,takuya,1,,,SEMANTIC
-56bfd351a10cfb1400551312::SYN::0,takuya,0,,"""what"" is used as a Free relative",SYNTACTIC
-56bfd351a10cfb1400551312::SYN::1,takuya,0,OTHER,There's no Q,SYNTACTIC
-56bfd351a10cfb1400551312::SYN::2,takuya,0,OTHER,"There's no Q, ""what"" = Free relative",SYNTACTIC
-56bfd351a10cfb1400551312::LEX::0,takuya,1,,,LEXICAL
-56bfd351a10cfb1400551312::LEX::1,takuya,0,OTHER,"The equation ""work"" = ""B's quality"" is bizarre",LEXICAL
-56bfd351a10cfb1400551312::LEX::2,takuya,1,,,LEXICAL
-56ce0a3762d2951400fa69d6::SEM::0,takuya,0,OTHER,"""solo"" is not an instrument",SEMANTIC
-56ce0a3762d2951400fa69d6::SEM::1,takuya,1,,,SEMANTIC
-56ce0a3762d2951400fa69d6::SEM::2,takuya,1,,,SEMANTIC
-56ce0a3762d2951400fa69d6::SYN::0,takuya,1,,"""be born"" is used only in passive form",SYNTACTIC
-56ce0a3762d2951400fa69d6::SYN::1,takuya,0,OTHER,Strange Q (no inversion),SYNTACTIC
-56ce0a3762d2951400fa69d6::SYN::2,takuya,0,OTHER,There's no complex sentence,SYNTACTIC
-56ce0a3762d2951400fa69d6::LEX::0,takuya,1,,,LEXICAL
-56ce0a3762d2951400fa69d6::LEX::1,takuya,1,,,LEXICAL
-56ce0a3762d2951400fa69d6::LEX::2,takuya,1,,,LEXICAL
-56cbd8c66d243a140015ed88::SEM::0,takuya,0,SPAN_MISSING,,SEMANTIC
-56cbd8c66d243a140015ed88::SEM::1,takuya,0,SPAN_MISSING,The subject of the Q is partial,SEMANTIC
-56cbd8c66d243a140015ed88::SEM::2,takuya,0,SPAN_MISSING,"""his association (if only indirect) with political insurrection"" is missing",SEMANTIC
-56cbd8c66d243a140015ed88::SYN::0,takuya,0,OTHER,No passive,SYNTACTIC
-56cbd8c66d243a140015ed88::SYN::1,takuya,0,OTHER,No cleft,SYNTACTIC
-56cbd8c66d243a140015ed88::SYN::2,takuya,0,OTHER,The Q is perfect but not complex,SYNTACTIC
-56cbd8c66d243a140015ed88::LEX::0,takuya,1,,,LEXICAL
-56cbd8c66d243a140015ed88::LEX::1,takuya,0,OTHER,"The plural ""mediums"" is usually used for a different meaning ",LEXICAL
-56cbd8c66d243a140015ed88::LEX::2,takuya,0,OUT_OF_SCOPE,"""biography"" is not a part of ""artistic expressions""",LEXICAL
-56cf6ca44df3c31400b0d779::SEM::0,takuya,1,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SEM::1,takuya,1,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SEM::2,takuya,1,,,SEMANTIC
-56cf6ca44df3c31400b0d779::SYN::0,takuya,1,,,SYNTACTIC
-56cf6ca44df3c31400b0d779::SYN::1,takuya,1,,"Q is complex because it comes from the V under ""plan to""",SYNTACTIC
-56cf6ca44df3c31400b0d779::SYN::2,takuya,0,OTHER,"Strange Q (Wh- in situ), no complex sentence ",SYNTACTIC
-56cf6ca44df3c31400b0d779::LEX::0,takuya,0,DUPLICATE,"The same Q as the one given as ""Syntactic""",LEXICAL
-56cf6ca44df3c31400b0d779::LEX::1,takuya,1,,,LEXICAL
-56cf6ca44df3c31400b0d779::LEX::2,takuya,1,,,LEXICAL
-56d3a9bb2ccc5a1400d82ddb::SEM::0,takuya,1,,,SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SEM::1,takuya,1,,,SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SEM::2,takuya,1,,"""commissioned"" = ""orchestrated"" ?",SEMANTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::0,takuya,0,OTHER,The Q is not complex,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::1,takuya,0,OTHER,Passive = OK but the overall Q is not good without inversion,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::SYN::2,takuya,0,OTHER,The Q is not complex,SYNTACTIC
-56d3a9bb2ccc5a1400d82ddb::LEX::0,takuya,1,,,LEXICAL
-56d3a9bb2ccc5a1400d82ddb::LEX::1,takuya,0,DUPLICATE,"The same one as the one for Syntactic, which is a bad sentence",LEXICAL
-56d3a9bb2ccc5a1400d82ddb::LEX::2,takuya,1,,,LEXICAL
-56ccf12b62d2951400fa64f3::SEM::0,takuya,0,,,SEMANTIC
-56ccf12b62d2951400fa64f3::SEM::1,takuya,1,,,SEMANTIC
-56ccf12b62d2951400fa64f3::SEM::2,takuya,0,SPAN_MISSING,"""ignored the literati"" is added",SEMANTIC
-56ccf12b62d2951400fa64f3::SYN::0,takuya,0,OTHER,It is a correct paraphrase but is not a complex sentence,SYNTACTIC
-56ccf12b62d2951400fa64f3::SYN::1,takuya,0,OTHER,"Wh-in situ, odd sentence",SYNTACTIC
-56ccf12b62d2951400fa64f3::SYN::2,takuya,1,,,SYNTACTIC
-56ccf12b62d2951400fa64f3::LEX::0,takuya,1,,,LEXICAL
-56ccf12b62d2951400fa64f3::LEX::1,takuya,1,,,LEXICAL
-56ccf12b62d2951400fa64f3::LEX::2,takuya,0,DUPLICATE,Correct but duplicates one of the syntactic variants,LEXICAL
-56ce750daab44d1400b887b1::SEM::0,takuya,0,SPAN_MISSING,"""upgraded"" forgotten",SEMANTIC
-56ce750daab44d1400b887b1::SEM::1,takuya,1,,,SEMANTIC
-56ce750daab44d1400b887b1::SEM::2,takuya,1,,,SEMANTIC
-56ce750daab44d1400b887b1::SYN::0,takuya,0,OTHER,It's a simple sentence,SYNTACTIC
-56ce750daab44d1400b887b1::SYN::1,takuya,0,DUPLICATE,"Syntactically, it's a duplication of the original Q",SYNTACTIC
-56ce750daab44d1400b887b1::SYN::2,takuya,0,OTHER,Wh- in situ. ,SYNTACTIC
-56ce750daab44d1400b887b1::LEX::0,takuya,1,,,LEXICAL
-56ce750daab44d1400b887b1::LEX::1,takuya,1,,,LEXICAL
-56ce750daab44d1400b887b1::LEX::2,takuya,1,,,LEXICAL
-56cd7db262d2951400fa663a::SEM::0,takuya,1,,,SEMANTIC
-56cd7db262d2951400fa663a::SEM::1,takuya,0,OTHER,"The A lacks ""with""",SEMANTIC
-56cd7db262d2951400fa663a::SEM::2,takuya,1,,,SEMANTIC
-56cd7db262d2951400fa663a::SYN::0,takuya,0,OTHER,The Q is correct but not complex for me,SYNTACTIC
-56cd7db262d2951400fa663a::SYN::1,takuya,0,,The A is different from the one for the example,SYNTACTIC
-56cd7db262d2951400fa663a::SYN::2,takuya,0,OTHER,The Q is not a complex sentence,SYNTACTIC
-56cd7db262d2951400fa663a::LEX::0,takuya,1,,,LEXICAL
-56cd7db262d2951400fa663a::LEX::1,takuya,1,,,LEXICAL
-56cd7db262d2951400fa663a::LEX::2,takuya,1,,,LEXICAL
-56cd8c5762d2951400fa66aa::SEM::0,takuya,1,,,SEMANTIC
-56cd8c5762d2951400fa66aa::SEM::1,takuya,1,,,SEMANTIC
-56cd8c5762d2951400fa66aa::SEM::2,takuya,0,OUT_OF_SCOPE,The Q targets info out of context,SEMANTIC
-56cd8c5762d2951400fa66aa::SYN::0,takuya,0,OTHER,"L-targeting is not a weapon, the Q is not complex",SYNTACTIC
-56cd8c5762d2951400fa66aa::SYN::1,takuya,1,,,SYNTACTIC
-56cd8c5762d2951400fa66aa::SYN::2,takuya,1,,,SYNTACTIC
-56cd8c5762d2951400fa66aa::LEX::0,takuya,0,OTHER,L-targeting is not an item,LEXICAL
-56cd8c5762d2951400fa66aa::LEX::1,takuya,0,OTHER,L-targeting is not an item,LEXICAL
-56cd8c5762d2951400fa66aa::LEX::2,takuya,0,OTHER,L-targeting is not a weapon,LEXICAL
-56cd96c162d2951400fa675b::SEM::0,takuya,1,,,SEMANTIC
-56cd96c162d2951400fa675b::SEM::1,takuya,1,,,SEMANTIC
-56cd96c162d2951400fa675b::SEM::2,takuya,1,,,SEMANTIC
-56cd96c162d2951400fa675b::SYN::0,takuya,0,OTHER,"The Q-A pair correct, but complex sentence ?",SYNTACTIC
-56cd96c162d2951400fa675b::SYN::1,takuya,0,OTHER,"Wh-in situ, strange sentence & not passive",SYNTACTIC
-56cd96c162d2951400fa675b::SYN::2,takuya,0,OTHER,"Sentence not complex, strange time adv for a static predicate",SYNTACTIC
-56cd96c162d2951400fa675b::LEX::0,takuya,1,,,LEXICAL
-56cd96c162d2951400fa675b::LEX::1,takuya,1,,,LEXICAL
-56cd96c162d2951400fa675b::LEX::2,takuya,1,,,LEXICAL
-5a8db847df8bba001a0f9ba5::SEM::0,takuya,1,,,SEMANTIC
-5a8db847df8bba001a0f9ba5::SEM::1,takuya,1,,,SEMANTIC
-5a8db847df8bba001a0f9ba5::SEM::2,takuya,0,OTHER,"Ill-formed Q: ""during"" does not permit preposition stranding",SEMANTIC
-5a8db847df8bba001a0f9ba5::SYN::0,takuya,0,OUT_OF_SCOPE,,SYNTACTIC
-5a8db847df8bba001a0f9ba5::SYN::1,takuya,0,OUT_OF_SCOPE,"Wh-in situ, out for me & out of scope as the example",SYNTACTIC
-5a8db847df8bba001a0f9ba5::SYN::2,takuya,0,OUT_OF_SCOPE,,SYNTACTIC
-5a8db847df8bba001a0f9ba5::LEX::0,takuya,0,OUT_OF_SCOPE,HD version of what?,LEXICAL
-5a8db847df8bba001a0f9ba5::LEX::1,takuya,0,OUT_OF_SCOPE,,LEXICAL
-5a8db847df8bba001a0f9ba5::LEX::2,takuya,0,OUT_OF_SCOPE,,LEXICAL
-56cedf84aab44d1400b88ba5::SEM::0,takuya,1,,,SEMANTIC
-56cedf84aab44d1400b88ba5::SEM::1,takuya,1,,,SEMANTIC
-56cedf84aab44d1400b88ba5::SEM::2,takuya,1,,,SEMANTIC
-56cedf84aab44d1400b88ba5::SYN::0,takuya,0,OUT_OF_SCOPE,"""former Bond theme singer"" cannot be inferred",SYNTACTIC
-56cedf84aab44d1400b88ba5::SYN::1,takuya,0,OUT_OF_SCOPE,"""former Bond theme singer"" cannot be inferred",SYNTACTIC
-56cedf84aab44d1400b88ba5::SYN::2,takuya,0,OUT_OF_SCOPE,"""former Bond theme singer"" cannot be inferred",SYNTACTIC
-56cedf84aab44d1400b88ba5::LEX::0,takuya,0,OUT_OF_SCOPE,"""previous Bond theme vocalist"" cannot be inferred from the text",LEXICAL
-56cedf84aab44d1400b88ba5::LEX::1,takuya,0,OUT_OF_SCOPE,"""ex-Bond theme singer"" cannot be inferred from the text",LEXICAL
-56cedf84aab44d1400b88ba5::LEX::2,takuya,0,OUT_OF_SCOPE,"""veteran Bond theme performer"" cannot be inferred from the text",LEXICAL
-56ceed3baab44d1400b88cce::SEM::0,takuya,1,,,SEMANTIC
-56ceed3baab44d1400b88cce::SEM::1,takuya,1,,,SEMANTIC
-56ceed3baab44d1400b88cce::SEM::2,takuya,1,,,SEMANTIC
-56ceed3baab44d1400b88cce::SYN::0,takuya,0,"OTHER, OUT_OF_SCOPE",The Q ok but it's not a complex sentence & the title of the film is not mentioned in the text,SYNTACTIC
-56ceed3baab44d1400b88cce::SYN::1,takuya,0,OUT_OF_SCOPE,The Q is ok but out of scope,SYNTACTIC
-56ceed3baab44d1400b88cce::SYN::2,takuya,0,"OTHER, OUT_OF_SCOPE",The Q ok but it's not a complex sentence & the title of the film is not mentioned in the text,SYNTACTIC
-56ceed3baab44d1400b88cce::LEX::0,takuya,0,OTHER,"Lexical ok but ""Spectre"" is out of scope",LEXICAL
-56ceed3baab44d1400b88cce::LEX::1,takuya,0,OTHER,"Lexical ok but ""Spectre"" is out of scope",LEXICAL
-56ceed3baab44d1400b88cce::LEX::2,takuya,0,OTHER,"Lexical ok but ""Spectre"" is out of scope",LEXICAL
-56d504539d1b871400ae05ec::SEM::0,takuya,,,,SEMANTIC
-56d504539d1b871400ae05ec::SEM::1,takuya,,,,SEMANTIC
-56d504539d1b871400ae05ec::SEM::2,takuya,,,,SEMANTIC
-56d504539d1b871400ae05ec::SYN::0,takuya,,,,SYNTACTIC
-56d504539d1b871400ae05ec::SYN::1,takuya,,,,SYNTACTIC
-56d504539d1b871400ae05ec::SYN::2,takuya,,,,SYNTACTIC
-56d504539d1b871400ae05ec::LEX::0,takuya,,,,LEXICAL
-56d504539d1b871400ae05ec::LEX::1,takuya,,,,LEXICAL
-56d504539d1b871400ae05ec::LEX::2,takuya,,,,LEXICAL
-56d64d231c8504140094708b::SEM::0,takuya,,,,SEMANTIC
-56d64d231c8504140094708b::SEM::1,takuya,,,,SEMANTIC
-56d64d231c8504140094708b::SEM::2,takuya,,,,SEMANTIC
-56d64d231c8504140094708b::SYN::0,takuya,,,,SYNTACTIC
-56d64d231c8504140094708b::SYN::1,takuya,,,,SYNTACTIC
-56d64d231c8504140094708b::SYN::2,takuya,,,,SYNTACTIC
-56d64d231c8504140094708b::LEX::0,takuya,,,,LEXICAL
-56d64d231c8504140094708b::LEX::1,takuya,,,,LEXICAL
-56d64d231c8504140094708b::LEX::2,takuya,,,,LEXICAL
-56cecff4aab44d1400b88abe::SEM::0,takuya,,,,SEMANTIC
-56cecff4aab44d1400b88abe::SEM::1,takuya,,,,SEMANTIC
-56cecff4aab44d1400b88abe::SEM::2,takuya,,,,SEMANTIC
-56cecff4aab44d1400b88abe::SYN::0,takuya,,,,SYNTACTIC
-56cecff4aab44d1400b88abe::SYN::1,takuya,,,,SYNTACTIC
-56cecff4aab44d1400b88abe::SYN::2,takuya,,,,SYNTACTIC
-56cecff4aab44d1400b88abe::LEX::0,takuya,,,,LEXICAL
-56cecff4aab44d1400b88abe::LEX::1,takuya,,,,LEXICAL
-56cecff4aab44d1400b88abe::LEX::2,takuya,,,,LEXICAL
-56cedecdaab44d1400b88b8e::SEM::0,takuya,,,,SEMANTIC
-56cedecdaab44d1400b88b8e::SEM::1,takuya,,,,SEMANTIC
-56cedecdaab44d1400b88b8e::SEM::2,takuya,,,,SEMANTIC
-56cedecdaab44d1400b88b8e::SYN::0,takuya,,,,SYNTACTIC
-56cedecdaab44d1400b88b8e::SYN::1,takuya,,,,SYNTACTIC
-56cedecdaab44d1400b88b8e::SYN::2,takuya,,,,SYNTACTIC
-56cedecdaab44d1400b88b8e::LEX::0,takuya,,,,LEXICAL
-56cedecdaab44d1400b88b8e::LEX::1,takuya,,,,LEXICAL
-56cedecdaab44d1400b88b8e::LEX::2,takuya,,,,LEXICAL
-56d64f7c1c85041400947095::SEM::0,takuya,,,,SEMANTIC
-56d64f7c1c85041400947095::SEM::1,takuya,,,,SEMANTIC
-56d64f7c1c85041400947095::SEM::2,takuya,,,,SEMANTIC
-56d64f7c1c85041400947095::SYN::0,takuya,,,,SYNTACTIC
-56d64f7c1c85041400947095::SYN::1,takuya,,,,SYNTACTIC
-56d64f7c1c85041400947095::SYN::2,takuya,,,,SYNTACTIC
-56d64f7c1c85041400947095::LEX::0,takuya,,,,LEXICAL
-56d64f7c1c85041400947095::LEX::1,takuya,,,,LEXICAL
-56d64f7c1c85041400947095::LEX::2,takuya,,,,LEXICAL
-56d65a4b1c850414009470b3::SEM::0,takuya,,,,SEMANTIC
-56d65a4b1c850414009470b3::SEM::1,takuya,,,,SEMANTIC
-56d65a4b1c850414009470b3::SEM::2,takuya,,,,SEMANTIC
-56d65a4b1c850414009470b3::SYN::0,takuya,,,,SYNTACTIC
-56d65a4b1c850414009470b3::SYN::1,takuya,,,,SYNTACTIC
-56d65a4b1c850414009470b3::SYN::2,takuya,,,,SYNTACTIC
-56d65a4b1c850414009470b3::LEX::0,takuya,,,,LEXICAL
-56d65a4b1c850414009470b3::LEX::1,takuya,,,,LEXICAL
-56d65a4b1c850414009470b3::LEX::2,takuya,,,,LEXICAL
-56cef595aab44d1400b88d22::SEM::0,takuya,,,,SEMANTIC
-56cef595aab44d1400b88d22::SEM::1,takuya,,,,SEMANTIC
-56cef595aab44d1400b88d22::SEM::2,takuya,,,,SEMANTIC
-56cef595aab44d1400b88d22::SYN::0,takuya,,,,SYNTACTIC
-56cef595aab44d1400b88d22::SYN::1,takuya,,,,SYNTACTIC
-56cef595aab44d1400b88d22::SYN::2,takuya,,,,SYNTACTIC
-56cef595aab44d1400b88d22::LEX::0,takuya,,,,LEXICAL
-56cef595aab44d1400b88d22::LEX::1,takuya,,,,LEXICAL
-56cef595aab44d1400b88d22::LEX::2,takuya,,,,LEXICAL
+item_id,annotator,valid,confidence_scale,reason,notes,type
+5706a30b75f01819005e7c90::SEM::0,takuya,1,5,,14:20,SEMANTIC
+5706a30b75f01819005e7c90::SEM::1,takuya,1,5,,,SEMANTIC
+5706a30b75f01819005e7c90::SYN::0,takuya,1,5,,,SYNTACTIC
+5706a30b75f01819005e7c90::SYN::1,takuya,1,5,,,SYNTACTIC
+5706a30b75f01819005e7c90::LEX::0,takuya,1,5,,,LEXICAL
+5706a30b75f01819005e7c90::LEX::1,takuya,1,5,,,LEXICAL
+5706af7575f01819005e7d38::SEM::0,takuya,1,5,,,SEMANTIC
+5706af7575f01819005e7d38::SEM::1,takuya,1,5,,,SEMANTIC
+5706af7575f01819005e7d38::SYN::0,takuya,1,5,,,SYNTACTIC
+5706af7575f01819005e7d38::SYN::1,takuya,-1,5,DUPLICATE,,SYNTACTIC
+5706af7575f01819005e7d38::LEX::0,takuya,1,5,,,LEXICAL
+5706af7575f01819005e7d38::LEX::1,takuya,1,5,,,LEXICAL
+5a6a6750a9e0c9001a4e9deb::SEM::0,takuya,1,5,,,SEMANTIC
+5a6a6750a9e0c9001a4e9deb::SEM::1,takuya,1,5,,,SEMANTIC
+5a6a6750a9e0c9001a4e9deb::SYN::0,takuya,1,5,,,SYNTACTIC
+5a6a6750a9e0c9001a4e9deb::SYN::1,takuya,1,5,,,SYNTACTIC
+5a6a6750a9e0c9001a4e9deb::LEX::0,takuya,1,5,,,LEXICAL
+5a6a6750a9e0c9001a4e9deb::LEX::1,takuya,-1,5,DUPLICATE,,LEXICAL
+5727bb46ff5b5019007d93a0::SEM::0,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",SEMANTIC
+5727bb46ff5b5019007d93a0::SEM::1,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",SEMANTIC
+5727bb46ff5b5019007d93a0::SYN::0,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",SYNTACTIC
+5727bb46ff5b5019007d93a0::SYN::1,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",SYNTACTIC
+5727bb46ff5b5019007d93a0::LEX::0,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",LEXICAL
+5727bb46ff5b5019007d93a0::LEX::1,takuya,0,5,,"Considérant que UCC a été inféré dans la question d'origine à partir de ""the city's university"" (donc la question d'origine correcte)",LEXICAL
+57268141f1498d1400e8e20c::SEM::0,takuya,1,5,,,SEMANTIC
+57268141f1498d1400e8e20c::SEM::1,takuya,1,5,,,SEMANTIC
+57268141f1498d1400e8e20c::SYN::0,takuya,1,5,,,SYNTACTIC
+57268141f1498d1400e8e20c::SYN::1,takuya,1,5,,,SYNTACTIC
+57268141f1498d1400e8e20c::LEX::0,takuya,1,5,,,LEXICAL
+57268141f1498d1400e8e20c::LEX::1,takuya,-1,5,DUPLICATE,,LEXICAL
+5ace3dc232bba1001ae4a003::SEM::0,takuya,1,5,,,SEMANTIC
+5ace3dc232bba1001ae4a003::SEM::1,takuya,1,5,,,SEMANTIC
+5ace3dc232bba1001ae4a003::SYN::0,takuya,-1,5,OTHER,The Q is answerable,SYNTACTIC
+5ace3dc232bba1001ae4a003::SYN::1,takuya,-1,5,OTHER,The Q is answerable,SYNTACTIC
+5ace3dc232bba1001ae4a003::LEX::0,takuya,-1,5,OTHER,The Q is answerable,LEXICAL
+5ace3dc232bba1001ae4a003::LEX::1,takuya,-1,5,OTHER,The Q is answerable,LEXICAL
+573050f28ab72b1400f9c448::SEM::0,takuya,1,5,,,SEMANTIC
+573050f28ab72b1400f9c448::SEM::1,takuya,1,5,,,SEMANTIC
+573050f28ab72b1400f9c448::SYN::0,takuya,1,5,,,SYNTACTIC
+573050f28ab72b1400f9c448::SYN::1,takuya,-1,5,DUPLICATE,,SYNTACTIC
+573050f28ab72b1400f9c448::LEX::0,takuya,1,5,,,LEXICAL
+573050f28ab72b1400f9c448::LEX::1,takuya,1,5,,Quasi duplicate,LEXICAL
+5a8cae39fd22b3001a8d8d23::SEM::0,takuya,-1,5,SPAN_MISSING,,SEMANTIC
+5a8cae39fd22b3001a8d8d23::SEM::1,takuya,-1,5,SPAN_MISSING,,SEMANTIC
+5a8cae39fd22b3001a8d8d23::SYN::0,takuya,1,5,,,SYNTACTIC
+5a8cae39fd22b3001a8d8d23::SYN::1,takuya,1,5,,,SYNTACTIC
+5a8cae39fd22b3001a8d8d23::LEX::0,takuya,1,5,,,LEXICAL
+5a8cae39fd22b3001a8d8d23::LEX::1,takuya,-1,5,DUPLICATE,,LEXICAL
+5728037eff5b5019007d9af0::SEM::0,takuya,0,5,,The original Q bad (wh in situ),SEMANTIC
+5728037eff5b5019007d9af0::SEM::1,takuya,0,5,,The original Q bad (wh in situ),SEMANTIC
+5728037eff5b5019007d9af0::SYN::0,takuya,0,5,,The original Q bad (wh in situ),SYNTACTIC
+5728037eff5b5019007d9af0::SYN::1,takuya,0,5,,The original Q bad (wh in situ),SYNTACTIC
+5728037eff5b5019007d9af0::LEX::0,takuya,0,5,,The original Q bad (wh in situ),LEXICAL
+5728037eff5b5019007d9af0::LEX::1,takuya,0,5,,The original Q bad (wh in situ),LEXICAL
+57273da05951b619008f8733::SEM::0,takuya,1,5,,,SEMANTIC
+57273da05951b619008f8733::SEM::1,takuya,1,5,,,SEMANTIC
+57273da05951b619008f8733::SYN::0,takuya,1,5,,,SYNTACTIC
+57273da05951b619008f8733::SYN::1,takuya,-1,5,DUPLICATE,,SYNTACTIC
+57273da05951b619008f8733::LEX::0,takuya,0,5,,Introduction of GI Bill is more important for the enlargement of gap,LEXICAL
+57273da05951b619008f8733::LEX::1,takuya,0,5,,Introduction of GI Bill is more important for the enlargement of gap,LEXICAL
+5ad3918c604f3c001a3fe67d::SEM::0,takuya,1,5,,,SEMANTIC
+5ad3918c604f3c001a3fe67d::SEM::1,takuya,1,5,,,SEMANTIC
+5ad3918c604f3c001a3fe67d::SYN::0,takuya,1,5,,,SYNTACTIC
+5ad3918c604f3c001a3fe67d::SYN::1,takuya,-1,5,DUPLICATE,"does not & doesn't, aren't they duplicates of each other?",SYNTACTIC
+5ad3918c604f3c001a3fe67d::LEX::0,takuya,1,5,,,LEXICAL
+5ad3918c604f3c001a3fe67d::LEX::1,takuya,1,5,,,LEXICAL
+570e28710dc6ce1900204e09::SEM::0,takuya,1,5,,,SEMANTIC
+570e28710dc6ce1900204e09::SEM::1,takuya,1,5,,,SEMANTIC
+570e28710dc6ce1900204e09::SYN::0,takuya,1,5,,,SYNTACTIC
+570e28710dc6ce1900204e09::SYN::1,takuya,1,5,,,SYNTACTIC
+570e28710dc6ce1900204e09::LEX::0,takuya,1,5,,,LEXICAL
+570e28710dc6ce1900204e09::LEX::1,takuya,1,5,,,LEXICAL
+5a75142d97ca42001a521e7f::SEM::0,takuya,0,5,,The original Q is answerable.,SEMANTIC
+5a75142d97ca42001a521e7f::SEM::1,takuya,0,5,,,SEMANTIC
+5a75142d97ca42001a521e7f::SYN::0,takuya,0,5,,15:27,SYNTACTIC
