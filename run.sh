@@ -1,27 +1,31 @@
-#!/bin/bash
+export RUN_ID=$(date +%Y%m%d_%H%M%S)
+export CUDA_VISIBLE_DEVICES=0,1
+export TOKENIZERS_PARALLELISM=false
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:256
+export TORCH_NCCL_BLOCKING_WAIT=1
+export NCCL_ASYNC_ERROR_HANDLING=1
 
-declare -A models
-models["qwen"]="/home/brachmat/phd/models/Qwen2.5-7B-Instruct"
-models["llama"]="/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline"
-# models["gemma"]="/export/home/cache/hub/unsloth-gemma-3-12b-it-offline"
+# torchrun --nproc_per_node=2 pararel_finetuning.py -N 300 --model qwen --cfg semantic
+# torchrun --nproc_per_node=2 pararel_finetuning.py -N 300 --model qwen --cfg syntactic
+# torchrun --nproc_per_node=2 pararel_finetuning.py -N 300 --model qwen --cfg lexical
+# torchrun --nproc_per_node=2 pararel_finetuning.py -N 300 --model qwen --cfg all
+# (54000, 27000.0, 13500.0, 6750.0)
 
-for name in "${!models[@]}"; do
-    model="${models[$name]}"
-    echo ">>> Running evaluation for $name"
+# for model in qwen llama; do
+#   for N in 11250 22500 ; do
+#     for cfg in baseline semantic syntactic lexical all; do
+#       export RUN_ID=$(date +%Y%m%d_%H%M%S)
+#       echo ">>> Running $model | N=$N | cfg=$cfg"
+#       torchrun --nproc_per_node=2 pararel_finetuning.py -N $N --model $model --cfg $cfg
+#     done
+#   done
+# done
 
-    # Build args safely
-    args=(
-      --model "$model"
-      --split validation
-      --batch_size 8
-      --bnb8
-      --limit 0
-      --output_pred "results/predictions_techqa_${name}.jsonl"
-    )
 
-    if [[ "$name" != "gemma" ]]; then
-      args+=(--vllm 1)
-    fi
-
-    python eval_techqa_vllm.py "${args[@]}"
+for model in qwen llama; do
+  for dataset in squad pubmed; do
+    export RUN_ID=$(date +%Y%m%d_%H%M%S)
+    echo ">>> Running $model"
+    torchrun --nproc_per_node=2 pararel_finetuning_clean.py --dataset $dataset --model $model  
+  done
 done

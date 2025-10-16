@@ -300,7 +300,7 @@ def main():
     print(f"[Info] Loading model: {MODEL_PATH}", file=sys.stderr)
     model, tokenizer = FastLanguageModel.from_pretrained(
         MODEL_PATH,
-        load_in_4bit=False,                  
+        load_in_4bit=True,                  
         dtype=DTYPE,
         device_map={"": "cuda:1"},
         max_seq_length=CTX_LEN,

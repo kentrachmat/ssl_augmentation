@@ -13,7 +13,7 @@ do
         --input "$SQUAD_INPUT" \
         --name "gpt4o_$i" \
         --dataset "squadv2" \
-        --limit 80
+        --limit 10000
 done 
 
 # Run for PUBMED
@@ -24,7 +24,7 @@ do
         --input "$PUBMED_INPUT" \
         --name "gpt4o_$i" \
         --dataset "pubmed" \
-        --limit 80
+        --limit 10000
 done 
 
 echo "[Done] All runs completed."
