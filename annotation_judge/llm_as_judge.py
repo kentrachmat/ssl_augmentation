@@ -236,7 +236,7 @@ def main():
         sys.exit(1)
 
     if args.limit and args.limit > 0:
-        df = df.iloc[:args.limit].copy()
+        df = df.iloc[25000:args.limit].copy()
 
     val_list, reason_list, notes_list = [], [], []
     avg_lp_list, sum_lp_list, n_tok_list, lp_json_list = [], [], [], []

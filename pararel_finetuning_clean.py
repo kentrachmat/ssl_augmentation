@@ -10,7 +10,6 @@ import numpy as np
 import torch
 from datasets import Dataset
 
-# ---- Optional: CodeCarbon (rank-0 only) ----
 try:
     from codecarbon import EmissionsTracker
     HAS_CODECARBON = True
@@ -32,6 +31,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str)
 parser.add_argument("--model", type=str, default="qwen", choices=["qwen","llama"])
 parser.add_argument("--run_id", type=str, default=None)
+parser.add_argument("-N", "--num_samples", type=int, default=3625)
+parser.add_argument("--cfg", type=str,
+                    choices=["baseline", "semantic", "syntactic", "lexical", "all"],
+                    default="baseline")
 args = parser.parse_args()
 
 RUN_ID = os.environ.get("RUN_ID") or args.run_id or time.strftime("%Y%m%d_%H%M%S")
@@ -55,8 +58,8 @@ MODELS = {
 OUT_ROOT = Path("runs_unsloth_ddp_clean_"+args.dataset); OUT_ROOT.mkdir(parents=True, exist_ok=True)
 
 # ---------------- Hparams (2× H100) ----------------
-MAX_SEQ_LEN = 4096
-EPOCHS = 3
+MAX_SEQ_LEN = 2048
+EPOCHS = 4
 PER_DEVICE_TRAIN_BS = 32
 GRAD_ACCUM = 4
 LR = 1e-4
@@ -152,29 +155,135 @@ def load_model_tokenizer(path):
     model.config.use_cache = False
     return model, tokenizer
 
+import pandas as pd
+import numpy as np
+
+def process_and_sample(
+    df, 
+    kind, 
+    n_samples=None, 
+    label_1_ratio=None
+): 
+    df = df[df['type'] == kind]
+    
+    required_cols = ['id', 'context', 'question', 'answer']
+    if kind in ["SYNTACTIC", "LEXICAL"]:
+        required_cols.append('original_answer')
+    processed_df = df[required_cols].copy()
+
+    if kind in ["SYNTACTIC", "LEXICAL"]:
+        processed_df['answer'] = processed_df['original_answer']
+    
+    condition = (processed_df['answer'].str.lower() == "unanswerable").fillna(False)
+
+    processed_df['label'] = np.where(condition, 0, 1)
+    
+    final_cols = ['id', 'context', 'question', 'answer', 'label']
+    processed_df = processed_df[final_cols]
+    
+    if n_samples is None:
+        return processed_df
+    df_1 = processed_df[processed_df['label'] == 1]
+    df_0 = processed_df[processed_df['label'] == 0]
+    
+    n_available_1 = len(df_1)
+    n_available_0 = len(df_0)
+    n_available_total = n_available_1 + n_available_0
+    
+    # Handle edge case of empty data
+    if n_available_total == 0:
+        return processed_df.iloc[0:0] # Return empty df with correct columns
+
+    # Cap n_samples at the maximum available data
+    if n_samples > n_available_total:
+        print(f"Warning: Requested n_samples ({n_samples}) is more than available data ({n_available_total}). Returning all {n_available_total} samples.")
+        n_samples = n_available_total
+        
+    # --- Step 3: Determine Sample Counts ---
+    
+    # Determine the target ratio
+    target_ratio_1 = label_1_ratio
+    if target_ratio_1 is None:
+        # Case 1: Proportional sampling (use the original ratio)
+        target_ratio_1 = n_available_1 / n_available_total
+    elif not (0.0 <= target_ratio_1 <= 1.0):
+        raise ValueError("label_1_ratio must be between 0.0 and 1.0")
+
+    # Case 2: Fixed-ratio sampling (or proportional)
+    
+    # 1. Calculate desired counts
+    n_desired_1 = round(n_samples * target_ratio_1)
+    n_desired_0 = n_samples - n_desired_1
+
+    # 2. Check for shortages (how many we're missing from each class)
+    shortage_1 = max(0, n_desired_1 - n_available_1)
+    shortage_0 = max(0, n_desired_0 - n_available_0)
+    
+    # 3. Adjust initial counts to what's available
+    n_to_sample_1 = n_desired_1 - shortage_1 # This is min(n_desired_1, n_available_1)
+    n_to_sample_0 = n_desired_0 - shortage_0 # This is min(n_desired_0, n_available_0)
+
+    # 4. Re-allocate the shortfall to meet n_samples
+    #    (If we ran out of 1s, fill the gap with 0s, and vice-versa)
+    if shortage_1 > 0: 
+        n_to_sample_0 = min(n_available_0, n_to_sample_0 + shortage_1)
+    elif shortage_0 > 0:
+        n_to_sample_1 = min(n_available_1, n_to_sample_1 + shortage_0)
+            
+    # --- Step 4: Perform Sampling and Combine ---
+    
+    # Sample from each group without replacement
+    samples_1 = df_1.sample(n=n_to_sample_1, replace=False)
+    samples_0 = df_0.sample(n=n_to_sample_0, replace=False)
+    
+    # Combine the samples
+    final_df = pd.concat([samples_1, samples_0])
+    
+    # Shuffle the final dataframe and reset the index
+    final_df = final_df.sample(frac=1).reset_index(drop=True)
+    
+    return final_df
+
 def main():
-    print(args.dataset)
+    N = args.num_samples  
+    n_dev = int(N/10)
     if args.dataset == 'squad':
+        base_data = DS_TRAIN_SQUAD
         dev_data = DS_DEV_SQUAD   
         aug_data = AUG_CSV_SQUAD     
         valid_data = VALID_CSV_SQUAD 
     else:
+        base_data = DS_TRAIN_PUBMED
         dev_data = DS_DEV_PUBMED   
         aug_data = AUG_CSV_PUBMED     
         valid_data = VALID_CSV_PUBMED 
     
     base_init = pd.read_csv(aug_data)
     valid = pd.read_csv(valid_data)
+    valid = valid[valid['valid'] == 1]
     valid_ids = valid["item_id"].unique()
-    base = base_init[base_init["aug_id"].isin(valid_ids)].copy()
-    dev  = pd.read_csv(dev_data).sample(n=1000, random_state=42)
+    base_aug = base_init[base_init["aug_id"].isin(valid_ids)].copy()
+    dev  = pd.read_csv(dev_data).iloc[:n_dev]
+    base = pd.read_csv(base_data).iloc[:N]
 
-    train_df = base
+    TRAIN_BUILDERS = {
+        "baseline":  lambda: base,
+        "semantic":  lambda: process_and_sample(base_aug, "SEMANTIC", N, 0.8),
+        "syntactic": lambda: process_and_sample(base_aug, "SYNTACTIC", N, 0.8),
+        "lexical":   lambda: process_and_sample(base_aug, "LEXICAL", N, 0.8),
+        "all":       lambda: pd.concat([
+                            base.iloc[:int(N/4)],
+                            process_and_sample( base_aug, "SEMANTIC", N, 0.8).iloc[:int(N/4)],
+                            process_and_sample(base_aug, "SYNTACTIC", N, 0.8).iloc[:int(N/4)],
+                            process_and_sample(base_aug, "LEXICAL", N, 0.8).iloc[:int(N/4)],
+                        ], ignore_index=True),
+    } 
+   
+    train_df = TRAIN_BUILDERS[args.cfg]()
     dev_df   = dev   
     
     model_key = args.model
-    dataset = args.dataset
-    run_name = f"{RUN_ID}_{model_key}_{dataset}_gpus{WORLD_SIZE}"
+    run_name = f"{RUN_ID}_{model_key}_{args.cfg}_N{N}_gpus{WORLD_SIZE}"
     run_dir = OUT_ROOT / run_name
     if LOCAL_RANK == 0:
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -192,6 +301,7 @@ def main():
 
     collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
+    # CodeCarbon on rank 0 only
     tracker = None
     if ENABLE_CARBON and HAS_CODECARBON and (LOCAL_RANK == 0):
         tracker = EmissionsTracker(
@@ -202,7 +312,7 @@ def main():
             log_level="error",
             save_to_file=True,
             gpu_ids=None,
-            experiment_id=str(RUN_ID),
+            experiment_id=str(RUN_ID), 
         )
         tracker.start()
 
@@ -219,7 +329,7 @@ def main():
         weight_decay=0.01,
         lr_scheduler_type="cosine",
         warmup_ratio=WARMUP_RATIO,
-        max_grad_norm=1.0,
+        max_grad_norm=0.8,
         optim="adamw_torch_fused",
 
         # Precision
