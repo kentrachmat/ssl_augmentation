@@ -2,15 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import json
 import os
 import sys
-from typing import List, Dict, Tuple
 from dotenv import load_dotenv
 load_dotenv()
 
 import pandas as pd
-from datasets import load_dataset
 from openai import OpenAI
 
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "")     
@@ -22,13 +19,20 @@ TOP_P       = 1.0
 MAX_TOKENS  = 1024
 STOP_TOKENS = ["<|eot_id|>", "<|end_of_turn|>"]
 
-# =========================
-# Prompt templates
-# =========================
+# SYS_PROMPT = (
+#     "You are a careful assistant for extractive question answering. "
+#     "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
+# )
+
+
 SYS_PROMPT = (
-    "You are a careful assistant for extractive question answering. "
-    "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
+    "You are a careful assistant for question answering. Answer in English only. "
+    "You must answer using only the provided context. "
+    "First, state your answer clearly as 'yes', 'no', or 'unanswerable'. "
+    "If your answer is 'yes' or 'no', you must then provide a brief reason for your answer, based *strictly* on the context. "
+    "If the answer cannot be derived from the context, reply *exactly* 'unanswerable' and do not provide a reason."
 )
+
 USER_TEMPLATE = (
     "Answer the question strictly based on the context.\n\n"
     "Context:\n{context}\n\n"
@@ -36,9 +40,8 @@ USER_TEMPLATE = (
     "Answer:"
 )
 
-# =========================
-# Helpers
-# =========================
+
+
 def ask_chat(client: OpenAI, question: str, context: str) -> str:
     resp = client.chat.completions.create(
         model=DEPLOYMENT_NAME,
@@ -53,64 +56,17 @@ def ask_chat(client: OpenAI, question: str, context: str) -> str:
     )
     return (resp.choices[0].message.content or "").strip()
 
-def load_techqa(split: str, limit: int | None) -> Tuple[pd.DataFrame, List[Dict]]:
-    df = pd.read_csv("raw/techqa.csv")
-    df = df[df["split"] == split].copy()
-    if limit and limit > 0:
-        df = df.head(limit)
-
-    examples = []
-    for _, row in df.iterrows():
-        gold = row.get("answer") or ""
-        examples.append({
-            "id": row["id"],
-            "question": row["question"],
-            "context": row["context"],
-            "golds": [gold] if gold else [],
-        })
-    return df, examples
-
-def load_squad_v2(split: str, limit: int | None) -> Tuple[pd.DataFrame, List[Dict]]:
-    ds = load_dataset("/home/brachmat/phd/datasets/squad_v2", split=split)
-    if limit and limit > 0:
-        ds = ds.select(range(min(limit, len(ds))))
-    df = ds.to_pandas()
-
-    examples = []
-    for _, row in df.iterrows():
-        answers = row["answers"] if isinstance(row["answers"], dict) else {"text": [], "answer_start": []}
-        if len(answers["text"]) > 0 and answers["text"][0].strip():
-            gold_texts = answers["text"][0]
-        else:
-            gold_texts = "unanswerable"
-            
-        examples.append({
-            "id": row["id"],
-            "question": row["question"],
-            "context": row["context"],
-            "golds": gold_texts,
-        })
-    return df, examples
-
-def write_techqa_output(path_jsonl: str, rows: List[Dict]) -> None:
-    with open(path_jsonl, "w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
-def write_squad_v2_outputs(path_pred_json: str, path_jsonl: str, rows: List[Dict]) -> None:
-    id2pred = {r["id"]: r["predicted_answer"] for r in rows}
-    with open(path_pred_json, "w", encoding="utf-8") as f:
-        json.dump(id2pred, f, ensure_ascii=False, indent=2)
-
-    with open(path_jsonl, "w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+def load_data(dataset):
+    if dataset == 'squad_v2':
+        df = pd.read_csv("../datasets/squad_v2_final/test.csv")
+    else:
+        df = pd.read_csv("../datasets/pubmed_final/test.csv")
+    return df
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", required=True, choices=["techqa", "squad_v2"],
+    parser.add_argument("--dataset", required=True, choices=["pubmed", "squad_v2"],
                         help="Choose which dataset loader + output format to use.")
-    parser.add_argument("--split", default="validation")
     parser.add_argument("--limit", type=int, default=0, help="Optional quick test limit.")
     args = parser.parse_args()
 
@@ -118,53 +74,32 @@ def main():
         print("[ERROR] Set OPENAI_API_KEY in your environment or .env", file=sys.stderr)
         sys.exit(1)
 
-    print(f"[BOOT] Dataset: {args.dataset} | Split: {args.split}")
-    if args.dataset == "techqa":
-        df, examples = load_techqa(args.split, args.limit)
-        print(f"[Info] Using {len(df)} TechQA examples.")
-    else:
-        df, examples = load_squad_v2(args.split, args.limit)
-        print(f"[Info] Using {len(df)} SQuAD v2 examples.")
-
-    print("[BOOT] Initializing client …")
+    df = load_data(args.dataset)
     client = OpenAI(base_url=OPENAI_BASE_URL, api_key=OPENAI_API_KEY)
 
-    print("[RUN] Inference …")
     out_rows = []
-    for idx, ex in enumerate(examples, 1):
+    
+    for index, ex in df.iterrows():
         try:
             pred = ask_chat(client, question=ex["question"], context=ex["context"])
         except Exception as e:
             print(f"[WARN] API error on {ex['id']}: {e}", file=sys.stderr)
             pred = ""
 
-        golds = ex["golds"] or []
-        gold_one = golds if golds else ""
-
         out = {
             "id": ex["id"],
-            "question": ex["question"],
-            "context": ex["context"],
-            "predicted_answer": pred,
-            "gold_answer": gold_one,
-        }
-        # if golds:
-        #     out["all_gold_answers"] = golds
-
+            "pred_answer": pred,
+            "gold_answer": ex["answer"],
+            "model": "gpt4o",
+        } 
         out_rows.append(out)
 
-        if idx % 25 == 0 or idx == len(examples):
-            print(f"[Progress] {idx}/{len(examples)}", file=sys.stderr, flush=True)
+        if index % 25 == 0 or index == len(df):
+            print(f"[Progress] {index}/{len(df)}", file=sys.stderr, flush=True)
 
-    if args.dataset == "techqa":
-        out_path = "results/predictions_techqa_gpt4o.jsonl"
-        write_techqa_output(out_path, out_rows)
-        print(f"[DONE] Wrote {out_path}")
-    else:
-        out_json  = "results/predictions_squadv2_gpt4o.json"  
-        out_jsonl = "results/predictions_squadv2_gpt4o.jsonl"   
-        write_squad_v2_outputs(out_json, out_jsonl, out_rows)
-        print(f"[DONE] Wrote {out_json} and {out_jsonl}")
+    out_path = f"results/{args.dataset}_eval/gpt4o.csv"
+    out_df = pd.DataFrame(out_rows)
+    out_df.to_csv(out_path, index=False)
 
 if __name__ == "__main__":
     main()

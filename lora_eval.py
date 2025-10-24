@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import os
+
+os.environ['CUDA_VISIBLE_DEVICES'] = "1"
+
 import re
 import time
 import pandas as pd
@@ -19,7 +22,7 @@ DATASET = args.dataset
 
 CSV_PATH = f"/home/brachmat/phd/datasets/{DATASET}_final/test.csv" 
 OUT_DIR  = f"results/{DATASET}_eval"
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 MAX_NEW_TOKENS = 64
 MAX_INPUT_TOKENS = 3500
 TEMPERATURE = 0.0
@@ -32,16 +35,27 @@ BASE_MODELS = {
     "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
 }
 
-# Where LoRA fine-tunes live
-LORA_ROOTS = [
-    Path("runs_unsloth_ddp_clean_pubmed"),
-    Path("runs_unsloth_ddp_clean_squad"),
-]
+if DATASET == 'squad_v2':
+    LORA_ROOTS = [
+        Path("runs_unsloth_ddp_clean_squad"),
+    ]
+    
+    SYS_PROMPT = (
+        "You are a careful assistant for extractive question answering. Answer in English only. "
+        "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
+    )
+else:
+    LORA_ROOTS = [
+        Path("runs_unsloth_ddp_clean_pubmed"),
+    ]
 
-SYS_PROMPT = (
-    "You are a careful assistant for extractive question answering. Answer in English only. "
-    "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
-)
+    SYS_PROMPT = (
+        "You are a careful assistant for question answering. Answer in English only. "
+        "You must answer using only the provided context. "
+        "state your answer clearly as 'yes', 'no', or 'unanswerable'. "
+        # "If your answer is 'yes' or 'no', you must then provide a brief reason for your answer, based *strictly* on the context. "
+        # "If the answer cannot be derived from the context, reply *exactly* 'unanswerable' and do not provide a reason."
+    )
 
 USER_TEMPLATE = (
     "Context:\n{context}\n\n"
@@ -161,6 +175,8 @@ def main():
     for root in LORA_ROOTS:
         print(f"Scanning {root} ...")
         for run_dir in sorted(root.iterdir()):
+            if "13187" not in run_dir.name and DATASET == "pubmed":
+                continue
             if run_dir.is_dir():
                 exp_name = run_dir.name
 
@@ -171,8 +187,13 @@ def main():
                 else:
                     print(f"Skipping {exp_name} (unknown base model)")
                     continue
-
+                
                 res_df = run_model(exp_name, base_key, BASE_MODELS[base_key], run_dir, df)
+                
+                out_path_ind = Path(OUT_DIR) / f"{sanitize(exp_name)}_results.csv"
+                res_df.to_csv(out_path_ind, index=False)
+                print(f"Saved partial results for {exp_name}: {out_path_ind} ({len(res_df)} rows)")
+
                 all_results.append(res_df)
 
     if all_results:

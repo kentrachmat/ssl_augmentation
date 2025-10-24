@@ -55,7 +55,7 @@ MODELS = {
     "qwen":  "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
     "llama": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
 }
-OUT_ROOT = Path("runs_unsloth_ddp_clean_"+args.dataset); OUT_ROOT.mkdir(parents=True, exist_ok=True)
+OUT_ROOT = Path("runs_unsloth_ddp_clean1_"+args.dataset); OUT_ROOT.mkdir(parents=True, exist_ok=True)
 
 # ---------------- Hparams (2× H100) ----------------
 MAX_SEQ_LEN = 2048
@@ -263,7 +263,7 @@ def main():
     valid = valid[valid['valid'] == 1]
     valid_ids = valid["item_id"].unique()
     base_aug = base_init[base_init["aug_id"].isin(valid_ids)].copy()
-    dev  = pd.read_csv(dev_data).iloc[:n_dev]
+    dev  = pd.read_csv(dev_data).iloc[:min(len(pd.read_csv(dev_data)), n_dev)]
     base = pd.read_csv(base_data).iloc[:N]
 
     TRAIN_BUILDERS = {

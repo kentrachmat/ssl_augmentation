@@ -8,13 +8,17 @@ import torch
 from pathlib import Path
 from tqdm.auto import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import argparse
 
-# DATASET = 'pubmed'
-DATASET = 'squad_v2'
+parser = argparse.ArgumentParser()
+parser.add_argument("--dataset", type=str)
+args = parser.parse_args()
+
+DATASET = args.dataset
 
 CSV_PATH = f"/home/brachmat/phd/datasets/{DATASET}_final/test.csv" 
 OUT_DIR  = f"results/{DATASET}_eval"
-BATCH_SIZE = 32
+BATCH_SIZE = 18
 MAX_NEW_TOKENS = 64         
 MAX_INPUT_TOKENS = 3500        
 TEMPERATURE = 0.0
@@ -22,14 +26,25 @@ TOP_P = 1.0
 DO_SAMPLE = False
 
 MODELS = {
-    "qwen2.5-7b-instruct": "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
-    "llama-3.1-8b-instruct": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
+    "llama-3.1-70b-instruct": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-70B-Instruct-offline",
+    # "qwen2.5-7b-instruct": "/home/brachmat/phd/models/Qwen2.5-7B-Instruct",
+    # "llama-3.1-8b-instruct": "/export/home/cache/hub/models--meta-llama--Meta-Llama-3.1-8B-Instruct-offline",
 }
 
-SYS_PROMPT = (
-    "You are a careful assistant for extractive question answering. Answer in English only. "
-    "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
+if DATASET == 'pubmed':
+    SYS_PROMPT = (
+    "You are a careful assistant for question answering. Answer in English only. "
+    "You must answer using only the provided context. "
+    "First, state your answer clearly as 'yes', 'no', or 'unanswerable'. "
+    "If your answer is 'yes' or 'no', you must then provide a brief reason for your answer, based *strictly* on the context. "
+    "If the answer cannot be derived from the context, reply *exactly* 'unanswerable' and do not provide a reason."
 )
+else:
+    SYS_PROMPT = (
+        "You are a careful assistant for extractive question answering. Answer in English only. "
+        "Answer using only the given context. If the answer is not present, reply exactly: 'unanswerable'."
+    )
+
 
 USER_TEMPLATE = (
     "Context:\n{context}\n\n"
@@ -144,7 +159,7 @@ def run_model(model_key: str, model_path: str, df: pd.DataFrame):
         "model": model_key,
     })
 
-    out_path = Path(OUT_DIR) / f"{DATASET}_test_predictions_{sanitize(model_key)}.csv"
+    out_path = Path(OUT_DIR) / f"{DATASET}_{sanitize(model_key)}70b.csv"
     out_df.to_csv(out_path, index=False)
     print(f"Saved: {out_path}  ({len(out_df)} rows)")
 

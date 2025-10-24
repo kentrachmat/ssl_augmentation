@@ -46,7 +46,14 @@ def f1_score(pred, gold):
 def exact_match(pred, gold):
     return 1.0 if canon_no_answer(pred) == canon_no_answer(gold) else 0.0
 
-# ---------------- Semantic similarity ----------------
+def exact_match_binary(pred, gold):
+    pred_norm = canon_no_answer(pred)
+    gold_norm = canon_no_answer(gold)
+
+    if gold_norm in pred_norm:
+        return 1.0
+    return 0.0
+
 EMBED_MODEL_NAME = "/home/brachmat/phd/models/models--qwen3-embedding-0.6B"
 model = SentenceTransformer(EMBED_MODEL_NAME)
 
@@ -62,7 +69,41 @@ def semantic_similarity(pred, gold):
     return float(cos_sim([emb_pred], [emb_gold])[0][0])
 
 # ---------------- Evaluation ----------------
-def evaluate(results_csv, out_csv):
+def evaluate_pubmed(results_csv, out_csv):
+    df = pd.read_csv(results_csv)
+    all_out = []
+    
+    binary_df = pd.read_csv("../datasets/pubmed_final/binary_pubmed.csv")
+    for m, group in df.groupby("model"):
+        ems, f1s, sims, is_na, binary = [], [], [], [], []
+        for i, (index, row) in enumerate(tqdm(group.iterrows(), total=len(group), desc=f"Evaluating {m}")):
+            pred = str(row["pred_answer"]) if not pd.isna(row["pred_answer"]) else ""
+            gold = str(row["gold_answer"]) if not pd.isna(row["gold_answer"]) else ""
+            bina = str(binary_df.iloc[i]["binary_answer"]) if not pd.isna(binary_df.iloc[i]["binary_answer"]) else ""
+            
+            binary.append(exact_match_binary(pred, bina))
+            ems.append(exact_match(pred, gold))
+            f1s.append(f1_score(pred, gold))
+            sims.append(semantic_similarity(pred, gold))
+            is_na.append(1.0 if canon_no_answer(gold) == "" else 0.0)
+
+        all_out.append({
+            "model": m,
+            "em_mean_binary": float(np.mean(binary)),
+            "em_mean": float(np.mean(ems)),
+            "f1_mean": float(np.mean(f1s)),
+            "sim_mean": float(np.mean(sims)),
+            "sim_std": float(np.std(sims)),
+            "unanswerable_rate": float(np.mean(is_na)),
+        })
+        print(all_out)
+
+    out_df = pd.DataFrame(all_out)
+    out_df.to_csv(out_csv, index=False)
+    print(f"✅ Saved evaluation: {out_csv}")
+    print(out_df.to_string(index=False))
+    
+def evaluate_squad(results_csv, out_csv):
     df = pd.read_csv(results_csv)
     all_out = []
 
@@ -71,7 +112,6 @@ def evaluate(results_csv, out_csv):
         for _, row in tqdm(group.iterrows(), total=len(group), desc=f"Evaluating {m}"):
             pred = str(row["pred_answer"]) if not pd.isna(row["pred_answer"]) else ""
             gold = str(row["gold_answer"]) if not pd.isna(row["gold_answer"]) else ""
-
             ems.append(exact_match(pred, gold))
             f1s.append(f1_score(pred, gold))
             sims.append(semantic_similarity(pred, gold))
@@ -79,13 +119,14 @@ def evaluate(results_csv, out_csv):
 
         all_out.append({
             "model": m,
-            "n": len(group),
             "em_mean": float(np.mean(ems)),
             "f1_mean": float(np.mean(f1s)),
             "sim_mean": float(np.mean(sims)),
             "sim_std": float(np.std(sims)),
             "unanswerable_rate": float(np.mean(is_na)),
         })
+        print(all_out)
+        
 
     out_df = pd.DataFrame(all_out)
     out_df.to_csv(out_csv, index=False)
@@ -94,8 +135,20 @@ def evaluate(results_csv, out_csv):
 
 # ---------------- Run ----------------
 if __name__ == "__main__":
-    for folder in ["results/pubmed_eval", "results/squad_v2_eval"]:
-        results_csv = Path(folder) / "results.csv"
-        out_csv = Path(folder) / "evaluation.csv"
-        if results_csv.exists():
-            evaluate(results_csv, out_csv)
+    for folder in ["results/pubmed_eval"]:
+    # for folder in ["results/squad_v2_eval"]:
+        results_csv = Path(folder) / "all_result.csv"
+        out_csv = Path(folder) / "all_evaluation_2.csv"
+
+        if not results_csv.exists():
+            print(f"⚠️ Skipping {folder}, no all_result.csv found")
+            continue
+
+        if "pubmed" in folder:
+            print(f"▶ Evaluating PubMed in {folder}")
+            evaluate_pubmed(results_csv, out_csv)
+        elif "squad" in folder:
+            print(f"▶ Evaluating SQuAD in {folder}")
+            evaluate_squad(results_csv, out_csv)
+        else:
+            print(f"⚠️ Unknown folder type: {folder}, skipping")
